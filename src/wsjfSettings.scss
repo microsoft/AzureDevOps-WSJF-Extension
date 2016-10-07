@@ -1,0 +1,23 @@
+.description-text, .description-image {
+    margin-left: 20px;
+    padding-bottom: 20px;
+}
+
+.menu-bar {
+    overflow: hidden;
+    margin: 0 10px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    font: 12px Segoe UI,Helvetica Neue,Helvetica,Arial,Verdana;
+    color: #1e1e1e;
+
+}
+
+.settings-control {
+    margin-top: 20px;
+    margin-left: 20px;
+
+    .combo {
+        width: 400px;
+    }
+}

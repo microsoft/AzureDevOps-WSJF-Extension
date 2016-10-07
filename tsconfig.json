@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "module": "amd",
+        "sourceMap": false
+    },   
+    "filesGlob": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "typings/index.d.ts"
+    ]    
+}

@@ -1,0 +1,89 @@
+{
+    "manifestVersion": 1,
+    "version": "1.0.6",
+    "name": "WSJF (Weighted Shortest Job First)",
+    "scopes": [ "vso.work", "vso.work_write" ],
+    "description": "Auto calculates WSJF (weighted shortest job first) per work item and stores it in a work item field.",
+    "publisher": "MS-Agile-SAFe",
+    "id": "WSJF-extension",
+    "icons": {
+        "default": "marketplace/logo.png"
+    },
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "tags": [
+        "Work Items", "WSJF", "SAFe", "Agile", "Backlog", "Stack rank"
+    ],
+    "content": {
+        "details": {
+            "path": "marketplace/details.md"
+        }
+    },
+    "links": {       
+        "Scaled Agile Framework": {
+            "uri": "http://www.scaledagileframework.com"
+        },
+        "WSJF": {
+            "uri": "http://www.scaledagileframework.com/wsjf/"
+        },
+        "issues": {
+            "uri": "http://www.github.com/justmarks/WSJF_VSTS/issues"
+        },
+        "support": {
+            "uri": "mailto:justmarks@live.com"
+        }
+    },
+    "branding": {
+        "color": "rgb(220, 235, 252)",
+        "theme": "light"
+    },
+    "categories": [
+        "Plan and track"
+    ],
+    "demands" : [
+        "api-version/3.0"
+    ],
+    "contributions": [
+        {  
+            "id": "wsjf-work-item-form-observer",
+            "type": "ms.vss-work-web.work-item-notifications",
+            "description": "Update the 'WSJF' field when other fields on the form change.",
+            "targets": [
+                "ms.vss-work-web.work-item-form"
+            ],
+            "properties": {
+                "uri": "src/wsjf.html"
+            }
+        },
+        {
+            "id": "wsjf-settings-hub",
+            "type": "ms.vss-web.hub",
+            "description": "Collection level settings experience for managing fields used to calculate WSJF.",
+            "targets": [
+                "ms.vss-web.collection-admin-hub-group"
+            ],
+            "properties": {
+                "name": "WSJF",
+                "uri": "src/wsjfSettings.html"
+            }
+        },
+        {
+            "id": "wsjf-contextMenu",
+            "type": "ms.vss-web.action",
+            "description": "Work item context menu action to update the WSJF field value for the selected work items.",
+            "targets": [
+                "ms.vss-work-web.work-item-context-menu"
+            ],
+            "properties": {
+                "text": "Recalculate WSJF values",
+                "title": "Update the WSJF value for the selected work items",  
+                "icon": "img/icon-refresh.png",
+                "groupId": "SAFe",
+                "uri": "src/wsjf.html"
+            }
+        }
+    ]
+}
