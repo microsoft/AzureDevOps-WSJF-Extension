@@ -22,21 +22,12 @@
             "path": "marketplace/details.md"
         }
     },
-    "links": {       
-        "Scaled Agile Framework": {
-            "uri": "http://www.scaledagileframework.com"
-        },
-        "WSJF": {
-            "uri": "http://www.scaledagileframework.com/wsjf/"
-        },
-        "issues": {
-            "uri": "https://github.com/Microsoft/vsts-wsjf-extension/issues"
-        },
-        "source": {
+    "links": {
+        "learn": {
             "uri": "https://github.com/Microsoft/vsts-wsjf-extension"
         },
         "support": {
-            "uri": "mailto:justmarks@live.com"
+            "uri": "mailto:jmarks@microsoft.com"
         }
     },
     "branding": {
