@@ -30,7 +30,10 @@
             "uri": "http://www.scaledagileframework.com/wsjf/"
         },
         "issues": {
-            "uri": "http://www.github.com/justmarks/WSJF_VSTS/issues"
+            "uri": "https://github.com/Microsoft/vsts-wsjf-extension/issues"
+        },
+        "source": {
+            "uri": "https://github.com/Microsoft/vsts-wsjf-extension"
         },
         "support": {
             "uri": "mailto:justmarks@live.com"
