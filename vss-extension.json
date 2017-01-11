@@ -1,6 +1,6 @@
 {
     "manifestVersion": 1,
-    "version": "1.0.7",
+    "version": "1.0.8",
     "name": "WSJF (Weighted Shortest Job First)",
     "scopes": [ "vso.work", "vso.work_write" ],
     "description": "Auto calculates WSJF (weighted shortest job first) per work item and stores it in a work item field.",
