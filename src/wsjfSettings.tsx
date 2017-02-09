@@ -67,6 +67,8 @@ export class Settings {
                     case "timeCriticality":
                         that._selectedFields.tcField = fieldReferenceName;
                         break;
+                    case "RROE-Value":
+                        that._selectedFields.rvField = fieldReferenceName;
                     case "effort":
                         that._selectedFields.effortField = fieldReferenceName;
                         break;
@@ -87,8 +89,6 @@ export class Settings {
         let header = $("<div />").addClass("description-text bowtie").appendTo(hubContent);
         header = $("<div />").addClass("description-text bowtie").appendTo(hubContent);
         header.html(Utils_string.format(descriptionText,
-            "<a target='_blank' href='http://www.scaledagileframework.com/wsjf/'>WSJF (Weighted Shortest Job First)</a>",
-            "<a target='_blank' href='http://www.scaledagileframework.com'>SAFe</a>"));
 
         $("<img src='http://www.scaledagileframework.com/wp-content/uploads/2014/07/Figure-2.-A-formula-for-calculating-WSJF.png' />").addClass("description-image").appendTo(hubContent);
         
@@ -122,6 +122,9 @@ export class Settings {
         let tcContainer = $("<div />").addClass("settings-control").appendTo(container);
         $("<label />").text("Time Criticality Field").appendTo(tcContainer);
 
+        let rvContainer = $("<div />").addClass("settings-control").appendTo(container);
+        $("<label />").text("RR-OE Values Field").appendTo(rvContainer);
+
         let effortContainer = $("<div />").addClass("settings-control").appendTo(container);
         $("<label />").text("Effort Field").appendTo(effortContainer);
 
@@ -139,6 +142,7 @@ export class Settings {
                     this._selectedFields = {
                         bvField: "Microsoft.VSTS.Common.BusinessValue",
                         tcField: "Microsoft.VSTS.Common.TimeCriticality",
+                        rvField: null,
                         effortField: "Microsoft.VSTS.Scheduling.Effort",
                         wsjfField: null
                     };
@@ -147,6 +151,7 @@ export class Settings {
                 this.getSortedFieldsList().then((fieldList) => {
                     Controls.create(Combo, bvContainer, this.getComboOptions("businessValue", fieldList, this._selectedFields.bvField));
                     Controls.create(Combo, tcContainer, this.getComboOptions("timeCriticality", fieldList, this._selectedFields.tcField));
+                    Controls.create(Combo, rvContainer, this.getComboOptions("rroevalue", fieldList, this._selectedFields.rvField));
                     Controls.create(Combo, effortContainer, this.getComboOptions("effort", fieldList, this._selectedFields.effortField));
                     Controls.create(Combo, wsjfContainer, this.getComboOptions("wsjf", fieldList, this._selectedFields.wsjfField));
                     this.updateSaveButton();
@@ -168,7 +173,7 @@ export class Settings {
     } 
 
     private updateSaveButton() {
-        var buttonState = (this._selectedFields.bvField && this._selectedFields.tcField && 
+        var buttonState = (this._selectedFields.bvField && this._selectedFields.tcField && this._selectedFields.rvField &&
                             this._selectedFields.effortField && this._selectedFields.wsjfField) && this._changeMade
                             ? Menus.MenuItemState.None : Menus.MenuItemState.Disabled;
 
