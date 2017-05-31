@@ -23,7 +23,7 @@ function GetStoredFields(): IPromise<StoredFieldReferences> {
 function getWorkItemFormService()
 {
     return WorkItemFormService.getService();
-}
+}+ timeCriticality
 
 function updateWSJFOnForm(storedFields:StoredFieldReferences) {
     getWorkItemFormService().then((service) => {
@@ -31,21 +31,24 @@ function updateWSJFOnForm(storedFields:StoredFieldReferences) {
             var matchingBusinessValueFields = fields.filter(field => field.referenceName === storedFields.bvField);
             var matchingTimeCriticalityFields = fields.filter(field => field.referenceName === storedFields.tcField);
             var matchingEffortFields = fields.filter(field => field.referenceName === storedFields.effortField); 
+            var matchingRROVFields = fields.filter(field => field.referenceName === storedFields.RROVField);
             var matchingWSJFFields = fields.filter(field => field.referenceName === storedFields.wsjfField);
 
             //If this work item type has WSJF, then update WSJF
             if ((matchingBusinessValueFields.length > 0) &&
                 (matchingTimeCriticalityFields.length > 0) &&
                 (matchingEffortFields.length > 0) &&
+                (matchingRROVFields.length > 0) &&
                 (matchingWSJFFields.length > 0)) {
-                service.getFieldValues([storedFields.bvField, storedFields.tcField, storedFields.effortField]).then((values) => {
+                service.getFieldValues([storedFields.bvField, storedFields.tcField, storedFields.RROVField, storedFields.effortField]).then((values) => {
                     var businessValue  = +values[storedFields.bvField];
                     var timeCriticality = +values[storedFields.tcField];
+                    var RROV = +values[storedFields.RROVField];
                     var effort = +values[storedFields.effortField];
 
                     var wsjf = 0;
                     if (effort > 0) {
-                        wsjf = (businessValue + timeCriticality)/effort;
+                        wsjf = (businessValue )/effort;
                     }
                     
                     service.setFieldValue(storedFields.wsjfField, wsjf);
@@ -59,6 +62,7 @@ function updateWSJFOnGrid(workItemId, storedFields:StoredFieldReferences):IPromi
     let wsjfFields = [
         storedFields.bvField,
         storedFields.tcField,
+        storedFields.RROVField,
         storedFields.effortField,
         storedFields.wsjfField
     ];
@@ -70,11 +74,12 @@ function updateWSJFOnGrid(workItemId, storedFields:StoredFieldReferences):IPromi
         if (storedFields.wsjfField !== undefined) {     
             var businessValue = +workItem.fields[storedFields.bvField];
             var timeCriticality = +workItem.fields[storedFields.tcField];
+            var RROVValue = +workItem.fields[storedFields.RROVField];
             var effort = +workItem.fields[storedFields.effortField];
 
             var wsjf = 0;
             if (effort > 0) {
-                wsjf = (businessValue + timeCriticality)/effort;
+                wsjf = (businessValue + RROV + timeCriticality)/effort;
             }
 
             var document = [{
@@ -86,7 +91,7 @@ function updateWSJFOnGrid(workItemId, storedFields:StoredFieldReferences):IPromi
 
             // Only update the work item if the WSJF has changed
             if (wsjf != workItem.fields[storedFields.wsjfField]) {
-                client.updateWorkItem(document, workItemId).then((updatedWorkItem:Contracts.WorkItem) => {
+                 client.updateWorkItem(document, workItemId).then((updatedWorkItem:Contracts.WorkItem) => {
                     deferred.resolve(updatedWorkItem);
                 });
             }
@@ -107,10 +112,11 @@ var formObserver = (context) => {
     return {
         onFieldChanged: function(args) {
             GetStoredFields().then((storedFields:StoredFieldReferences) => {
-                if (storedFields && storedFields.bvField && storedFields.effortField && storedFields.tcField && storedFields.wsjfField) {
+                if (storedFields && storedFields.bvField && storedFields.RROVField && storedFields.effortField && storedFields.tcField && storedFields.wsjfField) {
                     //If one of fields in the calculation changes
                     if ((args.changedFields[storedFields.bvField] !== undefined) || 
                         (args.changedFields[storedFields.tcField] !== undefined) ||
+                         (args.changedFields[storedFields.RROVField] !== undefined) ||
                         (args.changedFields[storedFields.effortField] !== undefined)) {
                             updateWSJFOnForm(storedFields);
                         }
@@ -125,7 +131,7 @@ var formObserver = (context) => {
         
         onLoaded: function(args) {
             GetStoredFields().then((storedFields:StoredFieldReferences) => {
-                if (storedFields && storedFields.bvField && storedFields.effortField && storedFields.tcField && storedFields.wsjfField) {
+                if (storedFields && storedFields.bvField && storedFields.RROVField && storedFields.effortField && storedFields.tcField && storedFields.wsjfField) {
                     updateWSJFOnForm(storedFields);
                 }
                 else {
@@ -142,7 +148,7 @@ var contextProvider = (context) => {
     return {
         execute: function(args) {
             GetStoredFields().then((storedFields:StoredFieldReferences) => {
-                if (storedFields && storedFields.bvField && storedFields.effortField && storedFields.tcField && storedFields.wsjfField) {
+                if (storedFields && storedFields.bvField && storedFields.RROVField && storedFields.effortField && storedFields.tcField && storedFields.wsjfField) {
                     var workItemIds = args.workItemIds;
                     var promises = [];
                     $.each(workItemIds, function(index, workItemId) {
