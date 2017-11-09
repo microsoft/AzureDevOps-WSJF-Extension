@@ -1,3 +1,4 @@
+
 WSJF enables a **calculated field** for computing and storing WSJF on your work items.
 
 ![WSJF displaying on the work item form](marketplace/WSJF_on_form.png)
@@ -8,6 +9,7 @@ The [Scaled Agile Framework](http://www.scaledagileframework.com) defines [WSJF 
 
 Three values are used to calculate  WSJF:
 * **Business Value**
+* **Risk Reduction | Opportunity Enablement Value**
 * **Time Criticality** 
 * **Job Size**
 
@@ -17,13 +19,13 @@ Three values are used to calculate  WSJF:
 
 *NOTE: If you're using TFS onprem, you need to use witadmin to [Create a custom decimal field](https://www.visualstudio.com/en-us/docs/work/customize/add-modify-field#to-add-a-custom-field)*
 
-2. Navigate to the "WSJF" hub on the collection settings admin experience.  From here, you must specify the fields that will be used for Business Value, Time Criticality, Job Size and WSJF.  The first three are defaulted to the fields provided out of the box by Microsoft but can be changed to custom fields if you prefer.
+2. Navigate to the "WSJF" hub on the collection settings admin experience.  From here, you must specify the fields that will be used for Business Value, Risk Reduction | Opportunity Enablement Value, Time Criticality, Job Size and WSJF.  The first three are defaulted to the fields provided out of the box by Microsoft but can be changed to custom fields if you prefer.
 ![WSJF displaying on the work item form](marketplace/Settings.png)
 
 # Features
 ## Auto calculated WSJF field on the form
 * WSJF is automatically updated when form is loaded.
-* WSJF is automatically updated when the Business Value, Time Criticality, or Effort fields are updated.
+* WSJF is automatically updated when the Business Value, Risk Reduction | Opportunity Enablement Value, Time Criticality, or Effort fields are updated.
 ![WSJF is automatically updated on the work item form](marketplace/AutoCalcWSJF.gif)
 
 ## Recalculate WSJF context menu item
@@ -31,7 +33,7 @@ Three values are used to calculate  WSJF:
 ![Recalculate WSJF on the backlog](marketplace/Recalculate.gif)
 
 ## Settings hub
-* Specify which fields are used for WSJF, Business Value, Time Criticality, and Effort .
+* Specify which fields are used for WSJF, Business Value, Risk Reduction | Opportunity Enablement Value, Time Criticality, and Effort .
 ![Mapping fields for calculation](marketplace/Settings.gif)
 
 ## Support
