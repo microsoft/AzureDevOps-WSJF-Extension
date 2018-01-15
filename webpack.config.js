@@ -17,15 +17,11 @@ module.exports = {
     ],
     resolve: {
         extensions: [
-            "",
             ".webpack.js",
             ".web.js",
             ".ts",
             ".tsx",
-            ".js"],
-        root: [
-            path.resolve("./src")
-        ]
+            ".js"]
     },
     module: {
         loaders: [
@@ -35,7 +31,7 @@ module.exports = {
             },
             {
                 test: /\.s?css$/,
-                loaders: ["style", "css", "sass"]
+                loaders: ["style-loader", "css-loader", "sass-loader"]
             }
         ]
     },
@@ -45,7 +41,8 @@ module.exports = {
             { from: "./src/*.html", to: "./" },
             { from: "./marketplace", to: "marketplace" },
             { from: "./img", to: "img" },
-            { from: "./vss-extension.json", to: "vss-extension-release.json" }
+            { from: "./vss-extension.json", to: "vss-extension-release.json" },
+			{ from: "./configs/release.json", to: "release.json" }
         ])
     ]
 }

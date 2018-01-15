@@ -1,4 +1,4 @@
-import "wsjfSettings.scss";
+import "./wsjfSettings.scss";
 
 import Q = require("q");
 import Controls = require("VSS/Controls");
@@ -15,7 +15,7 @@ export class Settings {
     private _fields:Contracts.WorkItemField[];
     private _menuBar = null;
 
-    private getSortedFieldsList():IPromise<string[]> {
+    private getSortedFieldsList():IPromise<any> {
         var deferred = Q.defer();
         var client = WIT_Client.getClient();
         client.getFields().then((fields: Contracts.WorkItemField[]) => {
@@ -67,7 +67,7 @@ export class Settings {
                     case "timeCriticality":
                         that._selectedFields.tcField = fieldReferenceName;
                         break;
-                    case "RROE-Value":
+                    case "rroevalue":
                         that._selectedFields.rvField = fieldReferenceName;
                     case "effort":
                         that._selectedFields.effortField = fieldReferenceName;
@@ -88,7 +88,7 @@ export class Settings {
         let descriptionText = "{0} is a concept of {1} used for weighing the cost of delay with job size.";
         let header = $("<div />").addClass("description-text bowtie").appendTo(hubContent);
         header = $("<div />").addClass("description-text bowtie").appendTo(hubContent);
-        header.html(Utils_string.format(descriptionText,
+        header.html(Utils_string.format(descriptionText));
 
         $("<img src='http://www.scaledagileframework.com/wp-content/uploads/2014/07/Figure-2.-A-formula-for-calculating-WSJF.png' />").addClass("description-image").appendTo(hubContent);
         
