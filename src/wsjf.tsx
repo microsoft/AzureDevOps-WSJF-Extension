@@ -4,7 +4,7 @@ import Contracts = require("TFS/WorkItemTracking/Contracts");
 import {IWorkItemFormService, WorkItemFormService} from "TFS/WorkItemTracking/Services";
 import { StoredFieldReferences } from "wsjfModels";
  
-function GetStoredFields(): IPromise<StoredFieldReferences> {
+function GetStoredFields(): IPromise<any> {
     var deferred = Q.defer();
     VSS.getService<IExtensionDataService>(VSS.ServiceIds.ExtensionData).then((dataService: IExtensionDataService) => {
         dataService.getValue<StoredFieldReferences>("storedFields").then((storedFields:StoredFieldReferences) => {
@@ -30,14 +30,14 @@ function updateWSJFOnForm(storedFields:StoredFieldReferences) {
         service.getFields().then((fields: Contracts.WorkItemField[]) => {
             var matchingBusinessValueFields = fields.filter(field => field.referenceName === storedFields.bvField);
             var matchingTimeCriticalityFields = fields.filter(field => field.referenceName === storedFields.tcField);
-            var matchrvalueFields = fields.filter(field => field.referenceName === storedFields.rvField);
+            var matchingRROEValueFields = fields.filter(field => field.referenceName === storedFields.rvField);
             var matchingEffortFields = fields.filter(field => field.referenceName === storedFields.effortField); 
             var matchingWSJFFields = fields.filter(field => field.referenceName === storedFields.wsjfField);
 
             //If this work item type has WSJF, then update WSJF
             if ((matchingBusinessValueFields.length > 0) &&
                 (matchingTimeCriticalityFields.length > 0) &&
-                (matchrvalueFields.length > 0)&&
+                (matchingRROEValueFields.length > 0) &&
                 (matchingEffortFields.length > 0) &&
                 (matchingWSJFFields.length > 0)) {
                 service.getFieldValues([storedFields.bvField, storedFields.tcField, storedFields.rvField, storedFields.effortField]).then((values) => {
@@ -48,7 +48,7 @@ function updateWSJFOnForm(storedFields:StoredFieldReferences) {
 
                     var wsjf = 0;
                     if (effort > 0) {
-                        wsjf = (businessValue + timeCriticality)/effort;
+                        wsjf = (businessValue + timeCriticality + rroevalue)/effort;
                     }
                     
                     service.setFieldValue(storedFields.wsjfField, wsjf);
@@ -58,7 +58,7 @@ function updateWSJFOnForm(storedFields:StoredFieldReferences) {
     });
 }
 
-function updateWSJFOnGrid(workItemId, storedFields:StoredFieldReferences):IPromise<Contracts.WorkItem> {
+function updateWSJFOnGrid(workItemId, storedFields:StoredFieldReferences):IPromise<any> {
     let wsjfFields = [
         storedFields.bvField,
         storedFields.tcField,
@@ -71,7 +71,7 @@ function updateWSJFOnGrid(workItemId, storedFields:StoredFieldReferences):IPromi
 
     var client = WIT_Client.getClient();
     client.getWorkItem(workItemId, wsjfFields).then((workItem: Contracts.WorkItem) => {
-        if (storedFields.wsjfField !== undefined) {     
+        if (storedFields.wsjfField !== undefined && storedFields.rvField !== undefined) {     
             var businessValue = +workItem.fields[storedFields.bvField];
             var timeCriticality = +workItem.fields[storedFields.tcField];
             var rroevalue = +workItem.fields [storedFields.rvField];
