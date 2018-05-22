@@ -113,7 +113,7 @@ You need
 </Section>
 ```
 4. After this is done, open up your WSJF tab and adjust your settings:
-![Mapping fields for calculation](marketplace/Settings.gif)
+![Mapping fields for calculation](marketplace/Settings.png)
 
 	
 	
