@@ -139,6 +139,7 @@ export class Settings {
                 }
                 else {
                     console.log("Failed to retrieve fields from storage, defaulting values")
+					//Enter in your config referenceName for "rvField" and "wsjfField"
                     this._selectedFields = {
                         bvField: "Microsoft.VSTS.Common.BusinessValue",
                         tcField: "Microsoft.VSTS.Common.TimeCriticality",
