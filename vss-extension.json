@@ -1,10 +1,10 @@
 {
     "manifestVersion": 1,
     "version": "1.0.0",
-    "name": "QL WSJF (Weighted Shortest Job First)",
+    "name": "WSJF (Weighted Shortest Job First)",
     "scopes": [ "vso.work", "vso.work_write" ],
     "description": "Auto calculates WSJF (weighted shortest job first) per work item and stores it in a work item field.",
-    "publisher": "Quicken-Loans",
+    "publisher": "MS-Agile-SAFe",
     "id": "WSJF-extension",
     "icons": {
         "default": "marketplace/logo.png"
@@ -31,8 +31,8 @@
         }
     },
     "branding": {
-        "color": "rgb(255, 0, 0)",
-        "theme": "Dark"
+        "color": "rgb(220, 235, 252)",
+        "theme": "light"
     },
     "categories": [
         "Plan and track"
