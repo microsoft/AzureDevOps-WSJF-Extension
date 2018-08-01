@@ -62,17 +62,59 @@ All actions can be triggered using npm scripts (`npm run <target>`), no addition
 You need
 
 * node/npm
+1. Download the .zip file from the [Master Branch](https://github.com/Microsoft/vsts-wsjf-extension/archive/master.zip) 
+2. Extract to a local folder on your machine 
+3. Open up a command prompt (or powershell) and change directory to your root folder *(ie. C:\ ... \vsts-wsjf-extension-master)*
+4. Run the command in command prompt: `npm update && npm install` 
 
-then just clone and execute `npm install`.
 
-### Development ###
+*Note: Be sure to install npm in your root directory*
 
-1. Run `npm run publish:dev` to publish the current extension manifest to the marketplace as a private extension with a suffix of `-dev` added to the extension id. This package will use a baseUri of `https://localhost:8080`. 
+### Development (Local Instance of TFS) ###
+*These are solutions for running on a local instance of TFS **only**.  If you build from these and push to a live server, they will not work*
+* Run `npm run publish:dev` to publish the current extension manifest to the marketplace as a private extension with a suffix of `-dev` added to the extension id. This package will use a baseUri of `https://localhost:8080`. 
+* Run `npm run dev` to start a webpack development server that watches all source files. Tests live next to product code and use a `.tests.ts` suffix instead of only `.ts`.
+* To run a single test pass execute `npm run test`, to keep watching tests and build/execute as you develop execute `npm run dev:test`.
 
-2. Run `npm run dev` to start a webpack developmen server that watches all source files. Tests live next to product code and use a `.tests.ts` suffix instead of only `.ts`.
+### Production (Live TFS Server) ###
 
-3. To run a single test pass execute `npm run test`, to keep watching tests and build/execute as you develop execute `npm run dev:test`.
-
-### Production ###
+*Pushing to a live TFS Server instance*
 
  1. Run `npm run publish:release` to compile all modules into bundles, package them into a .vsix, and publish as a *public* extension to the VSTS marketplace.
+ 
+ *NOTE: You may get an error on the publish part, however your .vsix file should be in your root to manually upload to your TFS Server if you have not setup a marketplace*
+ 
+ ### Adding RROE and WSJF Score Values (For Non-VSTS) ###
+ 
+ 1. Export your WorkItem.XML file *(ie. Epic.XML)* using either [Visual Studio Powertools](https://marketplace.visualstudio.com/items?itemName=VisualStudioProductTeam.ProductivityPowerPack2017) or [WITAdmin](https://docs.microsoft.com/en-us/vsts/work/customize/reference/witadmin/witadmin-import-export-manage-wits?view=tfs-2018)
+ 2. At the bottom of your "Fields" section add the following (Name and reference names may vary):
+ 
+``` xml
+  <FIELD name="WSJF Risk-Reduction Opportunity-Enablement" refname="WSFJ.RROEValue" type="Integer" reportable="dimension">
+   <HELPTEXT> WSJF Risk-Reduction </HELPTEXT>
+ </FIELD>
+ 
+ <FIELD name="WSJF Score" refname="WSJF.Score" type="Double" reportable="dimension">
+   <HELPTEXT> WSJF Score </HELPTEXT>
+ </FIELD> 
+```
+3. Under your 
+`<Form>` and `<WebLayout>` tags, choose where you would like the WSJF calculation to go and add:
+
+```xml
+<Section>
+		   <Group Label="WSJF">
+              <Control Label="User-Business Value" Type="FieldControl" FieldName="Microsoft.VSTS.Common.BusinessValue" EmptyText="[Numbered Value]" />
+              <Control Label="Urgency/Time Criticality" Type="FieldControl" FieldName="Microsoft.VSTS.Common.TimeCriticality" EmptyText="[Numbered Value]" />
+              <Control Label="Risk Reduction/Opportunity Enablement" Type="FieldControl" FieldName="WSJF.RROEValue" EmptyText="[Numbered Value]" />
+			           <Control Label="Size" Type="FieldControl" FieldName="Microsoft.VSTS.Scheduling.Effort" EmptyText="[Numbered Value]" />
+              <Control Label="WSJF Score" Type="FieldControl" FieldName="WSJF.Value" EmptyText="[Numbered Value]" />
+     </Group>
+</Section>
+```
+4. After this is done, open up your WSJF tab and adjust your settings:
+![Mapping fields for calculation](marketplace/Settings.png)
+
+	
+	
+	   
