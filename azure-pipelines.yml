@@ -9,7 +9,7 @@ steps:
 
 - script: npm install
 
-- script: npm run compile
+- script: npm run build
 
 - script: npm run package
 
