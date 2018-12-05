@@ -3,19 +3,18 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <script src="../libs/VSS.SDK.min.js"></script>
+    <script src="lib/VSS.SDK.min.js"></script>
 </head>
 <body>
     <script type="text/javascript">
         // Initialize framework 
         VSS.init({
             explicitNotifyLoaded: true,
-            usePlatformScripts: true,
-            configureModuleLoader: true
+            usePlatformScripts: true
         });
         
         // Load main entry point for extension
-        VSS.require(["src/wsjf"], function () {
+        VSS.require(["scripts/wsjf"], function () {
             // Loading succeeded
             VSS.notifyLoadSucceeded();
         });

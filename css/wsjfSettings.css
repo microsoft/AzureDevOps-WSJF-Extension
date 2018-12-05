@@ -16,8 +16,8 @@
 .settings-control {
     margin-top: 20px;
     margin-left: 20px;
+}
 
-    .combo {
-        width: 400px;
-    }
+.settings-control .combo {
+    width: 400px;
 }

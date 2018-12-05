@@ -1,46 +1,15 @@
 {
-  "description": "",
-  "main": "webpack.config.js",
-  "scripts": {
-    "clean": "rimraf dist *.vsix",
-    "dev": "webpack-dev-server --hot --progress --colors --content-base ./src --https",
-    "package:dev": "node ./scripts/packageDev",
-    "publish:dev": "npm run package:dev && node ./scripts/publishDev",
-    "build:release": "npm run clean && mkdir dist && webpack --progress --colors --output-path ./dist -p",
-    "publish:release": "npm run build:release && node ./scripts/publishRelease",
-    "dev:test": "karma start",
-    "test": "karma start --single-run",
-    "postinstall": "typings install"
-  },
-  "author": "Christopher Schleiden",
-  "license": "MIT",
+  "version": "1.0.0",
   "devDependencies": {
-    "chai": "^4.1.2",
-    "copy-webpack-plugin": "^4.5.0",
-    "css-loader": "^0.28.10",
-    "cwd": "^0.10.0",
-    "karma": "^1.7.1",
-    "karma-chai": "^0.1.0",
-    "karma-mocha": "^1.3.0",
-    "karma-mocha-reporter": "^2.2.5",
-    "karma-phantomjs-launcher": "^1.0.4",
-    "karma-sinon": "^1.0.5",
-    "karma-webpack": "^2.0.13",
-    "mocha": "^4.1.0",
-    "node-sass": "^4.7.2",
-    "phantomjs-prebuilt": "^2.1.16",
-    "rimraf": "^2.6.2",
-    "sass-loader": "^6.0.7",
-    "sinon": "^4.4.2",
-    "style-loader": "^0.19.1",
-    "tfx-cli": "^0.4.16",
-    "ts-loader": "^3.5.0",
-    "typescript": "^2.7.2",
-    "typings": "^2.1.1",
-    "webpack": "^3.11.0",
-    "webpack-dev-server": "^2.11.2"
+    "tfx-cli": "^0.6.3",
+    "typescript": "^3.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p .",
+    "package": "tfx extension create"
   },
   "dependencies": {
-    "vss-web-extension-sdk": "^2.117.0"
+    "vss-web-extension-sdk": "^5.141.0"
   }
 }

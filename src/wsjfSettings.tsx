@@ -1,5 +1,3 @@
-import "./wsjfSettings.scss";
-
 import Q = require("q");
 import Controls = require("VSS/Controls");
 import {Combo, IComboOptions} from "VSS/Controls/Combos";
@@ -7,7 +5,8 @@ import Menus = require("VSS/Controls/Menus");
 import WIT_Client = require("TFS/WorkItemTracking/RestClient");
 import Contracts = require("TFS/WorkItemTracking/Contracts");
 import Utils_string = require("VSS/Utils/String");
-import { StoredFieldReferences } from "wsjfModels";
+
+import { StoredFieldReferences } from "./wsjfModels";
 
 export class Settings {
     private _changeMade = false;
@@ -90,7 +89,7 @@ export class Settings {
         header = $("<div />").addClass("description-text bowtie").appendTo(hubContent);
         header.html(Utils_string.format(descriptionText));
 
-        $("<img src='http://www.scaledagileframework.com/wp-content/uploads/2014/07/Figure-2.-A-formula-for-calculating-WSJF.png' />").addClass("description-image").appendTo(hubContent);
+        $("<img src='https://www.scaledagileframework.com/wp-content/uploads/2014/07/Figure-2.-A-formula-for-calculating-WSJF.png' />").addClass("description-image").appendTo(hubContent);
         
         descriptionText = "You must add a custom decimal field from the {0} to each work item type you wish to compute WSJF.";
         header = $("<div />").addClass("description-text bowtie").appendTo(hubContent);

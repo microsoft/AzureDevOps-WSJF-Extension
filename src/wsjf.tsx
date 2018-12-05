@@ -1,8 +1,10 @@
 import Q = require("q");
-import WIT_Client = require("TFS/WorkItemTracking/RestClient");
-import Contracts = require("TFS/WorkItemTracking/Contracts");
-import {IWorkItemFormService, WorkItemFormService} from "TFS/WorkItemTracking/Services";
-import { StoredFieldReferences } from "wsjfModels";
+
+import TFS_Wit_Contracts = require("TFS/WorkItemTracking/Contracts");
+import TFS_Wit_Client = require("TFS/WorkItemTracking/RestClient");
+import TFS_Wit_Services = require("TFS/WorkItemTracking/Services");
+
+import { StoredFieldReferences } from "./wsjfModels";
  
 function GetStoredFields(): IPromise<any> {
     var deferred = Q.defer();
@@ -22,12 +24,12 @@ function GetStoredFields(): IPromise<any> {
 
 function getWorkItemFormService()
 {
-    return WorkItemFormService.getService();
+    return TFS_Wit_Services.WorkItemFormService.getService();
 }
 
 function updateWSJFOnForm(storedFields:StoredFieldReferences) {
     getWorkItemFormService().then((service) => {
-        service.getFields().then((fields: Contracts.WorkItemField[]) => {
+        service.getFields().then((fields: TFS_Wit_Contracts.WorkItemField[]) => {
             var matchingBusinessValueFields = fields.filter(field => field.referenceName === storedFields.bvField);
             var matchingTimeCriticalityFields = fields.filter(field => field.referenceName === storedFields.tcField);
             var matchingRROEValueFields = fields.filter(field => field.referenceName === storedFields.rvField);
@@ -69,8 +71,8 @@ function updateWSJFOnGrid(workItemId, storedFields:StoredFieldReferences):IPromi
 
     var deferred = Q.defer();
 
-    var client = WIT_Client.getClient();
-    client.getWorkItem(workItemId, wsjfFields).then((workItem: Contracts.WorkItem) => {
+    var client = TFS_Wit_Client.getClient();
+    client.getWorkItem(workItemId, wsjfFields).then((workItem: TFS_Wit_Contracts.WorkItem) => {
         if (storedFields.wsjfField !== undefined && storedFields.rvField !== undefined) {     
             var businessValue = +workItem.fields[storedFields.bvField];
             var timeCriticality = +workItem.fields[storedFields.tcField];
@@ -91,7 +93,7 @@ function updateWSJFOnGrid(workItemId, storedFields:StoredFieldReferences):IPromi
 
             // Only update the work item if the WSJF has changed
             if (wsjf != workItem.fields[storedFields.wsjfField]) {
-                client.updateWorkItem(document, workItemId).then((updatedWorkItem:Contracts.WorkItem) => {
+                client.updateWorkItem(document, workItemId).then((updatedWorkItem:TFS_Wit_Contracts.WorkItem) => {
                     deferred.resolve(updatedWorkItem);
                 });
             }
