@@ -84,7 +84,7 @@ export class Settings {
         let hubContent = $(".hub-content");
         let uri = VSS.getWebContext().collection.uri + "_admin/_process";
         
-        let descriptionText = "{0} is a concept of {1} used for weighing the cost of delay with job size.";
+        let descriptionText = "WSJF is a concept of Scaled Agile Framework used for weighing the cost of delay with job size.";
         let header = $("<div />").addClass("description-text bowtie").appendTo(hubContent);
         header = $("<div />").addClass("description-text bowtie").appendTo(hubContent);
         header.html(Utils_string.format(descriptionText));
