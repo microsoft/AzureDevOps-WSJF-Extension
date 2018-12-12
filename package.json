@@ -10,6 +10,7 @@
     "package": "tfx extension create"
   },
   "dependencies": {
+    "npm": "^6.5.0",
     "vss-web-extension-sdk": "^5.141.0"
   }
 }
