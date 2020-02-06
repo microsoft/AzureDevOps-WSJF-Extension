@@ -4,6 +4,7 @@
         "moduleResolution": "node",
         "sourceMap": false,
         "jsx": "react",
+        "skipLibCheck": true,
         "outDir": "dist",
         "types": [
             "vss-web-extension-sdk"
