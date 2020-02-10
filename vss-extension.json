@@ -1,15 +1,15 @@
 {
     "public": false,
     "manifestVersion": 1,
-    "id": "WSJF-extension",
-    "publisher": "MS-Agile-SAFe",
-    "version": "1.2.0",
-    "name": "WSJF (Weighted Shortest Job First)",
-    "description": "Auto calculates WSJF (weighted shortest job first) per work item and stores it in a work item field.",
+    "id": "RPN-extension",
+    "publisher": "jschneider",
+    "version": "1.0.3",
+    "name": "RPN (Risk Priority Number)",
+    "description": "Auto calculates RPN (Risk Priority Number) per work item and stores it in a work item field.",
     "categories": [ "Azure Boards" ],
     "tags": [
-        "WSJF",
-        "SAFe"
+        "RPN",
+        "defect"
     ],
     "targets": [
         {
@@ -18,41 +18,41 @@
     ],
     "contributions": [
         {
-            "id": "wsjf-work-item-form-observer",
+            "id": "rpn-work-item-form-observer",
             "type": "ms.vss-work-web.work-item-notifications",
-            "description": "Update the 'WSJF' field when other fields on the form change.",
+            "description": "Update the 'RPN' field when other fields on the form change.",
             "targets": [
                 "ms.vss-work-web.work-item-form"
             ],
             "properties": {
-                "uri": "wsjf.html"
+                "uri": "rpn.html"
             }
         },
         {
-            "id": "wsjf-settings-hub",
+            "id": "rpn-settings-hub",
             "type": "ms.vss-web.hub",
-            "description": "Collection level settings experience for managing fields used to calculate WSJF.",
+            "description": "Collection level settings experience for managing fields used to calculate RPN.",
             "targets": [
                 "ms.vss-web.collection-admin-hub-group"
             ],
             "properties": {
-                "name": "WSJF",
-                "uri": "wsjfSettings.html"
+                "name": "RPN",
+                "uri": "rpnSettings.html"
             }
         },
         {
-            "id": "wsjf-contextMenu",
+            "id": "rpn-contextMenu",
             "type": "ms.vss-web.action",
-            "description": "Work item context menu action to update the WSJF field value for the selected work items.",
+            "description": "Work item context menu action to update the RPN field value for the selected work items.",
             "targets": [
                 "ms.vss-work-web.work-item-context-menu"
             ],
             "properties": {
-                "text": "Recalculate WSJF values",
-                "title": "Update the WSJF value for the selected work items",
+                "text": "Recalculate RPN values",
+                "title": "Update the RPN value for the selected work items",
                 "icon": "images/icon-refresh.png",
-                "groupId": "SAFe",
-                "uri": "wsjf.html"
+                "groupId": "RPN",
+                "uri": "rpn.html"
             }
         }
     ],
@@ -71,11 +71,11 @@
             "packagePath": "scripts"
         },
         {
-            "path": "wsjf.html",
+            "path": "rpn.html",
             "addressable": true
         },
         {
-            "path": "wsjfSettings.html",
+            "path": "rpnSettings.html",
             "addressable": true
         },
         {
@@ -98,12 +98,12 @@
     },
     "links": {
         "support": {
-            "uri": "mailto:jmarks@microsoft.com"
+            "uri": "mailto:jschneider@symplr.com"
         }
     },
     "repository": {
         "type": "git",
-        "uri": "https://github.com/Microsoft/vsts-wsjf-extension"
+        "uri": "https://github.com/symplr-oss/AzureDevOps-RPN-Extension"
       },
     "branding": {
         "color": "rgb(220, 235, 252)",

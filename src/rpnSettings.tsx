@@ -6,7 +6,7 @@ import WIT_Client = require("TFS/WorkItemTracking/RestClient");
 import Contracts = require("TFS/WorkItemTracking/Contracts");
 import Utils_string = require("VSS/Utils/String");
 
-import { StoredFieldReferences } from "./wsjfModels";
+import { StoredFieldReferences } from "./rpnModels";
 
 export class Settings {
     private _changeMade = false;
@@ -60,19 +60,19 @@ export class Settings {
                 let fieldReferenceName: string = (this.getSelectedIndex() < 0) ? null : that.getFieldReferenceName(fieldName);
 
                 switch (this._id) {
-                    case "businessValue":
-                        that._selectedFields.bvField = fieldReferenceName;
+                    case "Severity":
+                        that._selectedFields.svField = fieldReferenceName;
                         break;
-                    case "timeCriticality":
-                        that._selectedFields.tcField = fieldReferenceName;
+                    case "Occurence":
+                        that._selectedFields.ocField = fieldReferenceName;
                         break;
-                    case "rroevalue":
-                        that._selectedFields.rvField = fieldReferenceName;
-                    case "effort":
-                        that._selectedFields.effortField = fieldReferenceName;
+                    case "Detection":
+                        that._selectedFields.dtField = fieldReferenceName;
+                    case "UsersAffected":
+                        that._selectedFields.usersField = fieldReferenceName;
                         break;
-                    case "wsjf":
-                        that._selectedFields.wsjfField = fieldReferenceName;
+                    case "RPN":
+                        that._selectedFields.rpnField = fieldReferenceName;
                         break;
                 }
                 that.updateSaveButton();
@@ -89,13 +89,13 @@ export class Settings {
         header = $("<div />").addClass("description-text bowtie").appendTo(hubContent);
         header.html(Utils_string.format(descriptionText));
 
-        $("<img src='https://www.scaledagileframework.com/wp-content/uploads/2014/07/Figure-2.-A-formula-for-calculating-WSJF.png' />").addClass("description-image").appendTo(hubContent);
+        $("<img src='https://www.fmea-fmeca.com/images/fmea-rpn1.jpg' />").addClass("description-image").appendTo(hubContent);
         
-        descriptionText = "You must add a custom decimal field from the {0} to each work item type you wish to compute WSJF.";
+        descriptionText = "You must add a custom decimal field from the {0} to each work item type you wish to compute RPN.";
         header = $("<div />").addClass("description-text bowtie").appendTo(hubContent);
         header.html(Utils_string.format(descriptionText, "<a target='_blank' href='" + uri +"'>process hub</a>"));
 
-        let container = $("<div />").addClass("wsjf-settings-container").appendTo(hubContent);
+        let container = $("<div />").addClass("rpn-settings-container").appendTo(hubContent);
 
         var menubarOptions = {
             items: [
@@ -115,20 +115,20 @@ export class Settings {
         };
         this._menuBar = Controls.create<Menus.MenuBar, any>(Menus.MenuBar, container, menubarOptions);
 
-        let bvContainer = $("<div />").addClass("settings-control").appendTo(container);
-        $("<label />").text("Business Value Field").appendTo(bvContainer);
+        let svContainer = $("<div />").addClass("settings-control").appendTo(container);
+        $("<label />").text("Severity Field").appendTo(svContainer);
 
-        let tcContainer = $("<div />").addClass("settings-control").appendTo(container);
-        $("<label />").text("Time Criticality Field").appendTo(tcContainer);
+        let ocContainer = $("<div />").addClass("settings-control").appendTo(container);
+        $("<label />").text("Occurence Field").appendTo(ocContainer);
 
-        let rvContainer = $("<div />").addClass("settings-control").appendTo(container);
-        $("<label />").text("RR-OE Values Field").appendTo(rvContainer);
+        let dtContainer = $("<div />").addClass("settings-control").appendTo(container);
+        $("<label />").text("Detection Values Field").appendTo(dtContainer);
 
-        let effortContainer = $("<div />").addClass("settings-control").appendTo(container);
-        $("<label />").text("Effort Field").appendTo(effortContainer);
+        let usersContainer = $("<div />").addClass("settings-control").appendTo(container);
+        $("<label />").text("Users Affected Values Field").appendTo(usersContainer);
 
-        let wsjfContainer = $("<div />").addClass("settings-control").appendTo(container);
-        $("<label />").text("WSJF Field").appendTo(wsjfContainer);            
+        let rpnContainer = $("<div />").addClass("settings-control").appendTo(container);
+        $("<label />").text("RPN Field").appendTo(rpnContainer);            
 
         VSS.getService<IExtensionDataService>(VSS.ServiceIds.ExtensionData).then((dataService: IExtensionDataService) => {
             dataService.getValue<StoredFieldReferences>("storedFields").then((storedFields:StoredFieldReferences) => {
@@ -138,22 +138,22 @@ export class Settings {
                 }
                 else {
                     console.log("Failed to retrieve fields from storage, defaulting values")
-					//Enter in your config referenceName for "rvField" and "wsjfField"
+					//Enter in your config referenceName for "dtField" and "rpnField"
                     this._selectedFields = {
-                        bvField: "Microsoft.VSTS.Common.BusinessValue",
-                        tcField: "Microsoft.VSTS.Common.TimeCriticality",
-                        rvField: null,
-                        effortField: "Microsoft.VSTS.Scheduling.Effort",
-                        wsjfField: null
+                        svField: "Microsoft.VSTS.Common.Severity",
+                        ocField: null,
+                        dtField: null,
+                        usersField: null,
+                        rpnField: null
                     };
                 }
 
                 this.getSortedFieldsList().then((fieldList) => {
-                    Controls.create(Combo, bvContainer, this.getComboOptions("businessValue", fieldList, this._selectedFields.bvField));
-                    Controls.create(Combo, tcContainer, this.getComboOptions("timeCriticality", fieldList, this._selectedFields.tcField));
-                    Controls.create(Combo, rvContainer, this.getComboOptions("rroevalue", fieldList, this._selectedFields.rvField));
-                    Controls.create(Combo, effortContainer, this.getComboOptions("effort", fieldList, this._selectedFields.effortField));
-                    Controls.create(Combo, wsjfContainer, this.getComboOptions("wsjf", fieldList, this._selectedFields.wsjfField));
+                    Controls.create(Combo, svContainer, this.getComboOptions("Severity", fieldList, this._selectedFields.svField));
+                    Controls.create(Combo, ocContainer, this.getComboOptions("Occurence", fieldList, this._selectedFields.ocField));
+                    Controls.create(Combo, dtContainer, this.getComboOptions("Detection", fieldList, this._selectedFields.dtField));
+                    Controls.create(Combo, usersContainer, this.getComboOptions("UsersAffected", fieldList, this._selectedFields.usersField));
+                    Controls.create(Combo, rpnContainer, this.getComboOptions("RPN", fieldList, this._selectedFields.rpnField));
                     this.updateSaveButton();
 
                     VSS.notifyLoadSucceeded();
@@ -173,8 +173,8 @@ export class Settings {
     } 
 
     private updateSaveButton() {
-        var buttonState = (this._selectedFields.bvField && this._selectedFields.tcField && this._selectedFields.rvField &&
-                            this._selectedFields.effortField && this._selectedFields.wsjfField) && this._changeMade
+        var buttonState = (this._selectedFields.svField && this._selectedFields.ocField && this._selectedFields.dtField &&
+                            this._selectedFields.usersField && this._selectedFields.rpnField) && this._changeMade
                             ? Menus.MenuItemState.None : Menus.MenuItemState.Disabled;
 
         // Update the disabled state

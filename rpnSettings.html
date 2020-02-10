@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <script src="lib/VSS.SDK.min.js"></script>
+
+    <link href="css/rpnSettings.css" rel="stylesheet"></link>
 </head>
 <body>
     <script type="text/javascript">
@@ -12,12 +14,18 @@
             explicitNotifyLoaded: true,
             usePlatformScripts: true
         });
-        
+
         // Load main entry point for extension
-        VSS.require(["scripts/wsjf"], function () {
-            // Loading succeeded
-            VSS.notifyLoadSucceeded();
+        VSS.require(["scripts/rpnSettings"], function (s) {
+            var settings = new s.Settings();
+            settings.initialize();
         });
     </script>
+
+    <div class="hub-view">
+        <div class="hub-title">Settings</div>
+
+        <div class="hub-content" />
+    </div>
 </body>
 </html>
