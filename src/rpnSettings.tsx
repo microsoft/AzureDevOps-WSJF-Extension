@@ -84,14 +84,14 @@ export class Settings {
         let hubContent = $(".hub-content");
         let uri = VSS.getWebContext().collection.uri + "_admin/_process";
         
-        let descriptionText = "{0} is a concept of {1} used for weighing the cost of delay with job size.";
+        let descriptionText = "RPN is used for quantitatively assessing work items based off of risk.";
         let header = $("<div />").addClass("description-text bowtie").appendTo(hubContent);
         header = $("<div />").addClass("description-text bowtie").appendTo(hubContent);
         header.html(Utils_string.format(descriptionText));
 
         $("<img src='https://www.fmea-fmeca.com/images/fmea-rpn1.jpg' />").addClass("description-image").appendTo(hubContent);
         
-        descriptionText = "You must add a custom decimal field from the {0} to each work item type you wish to compute RPN.";
+        descriptionText = "must be an integer, or a specific string format for each work item type you wish to compute RPN.";
         header = $("<div />").addClass("description-text bowtie").appendTo(hubContent);
         header.html(Utils_string.format(descriptionText, "<a target='_blank' href='" + uri +"'>process hub</a>"));
 

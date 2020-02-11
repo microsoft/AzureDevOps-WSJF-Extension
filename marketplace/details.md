@@ -3,7 +3,7 @@ RPN enables a **calculated field** for computing and storing RPN on your work it
 
 All defects are created equal.
 RPN [RPN (Risk Priority Number)] is a calculation of several factors in a defect to help quantify the overall risk of a defect.
-![RPN = (Severity * Occurence * Detection)](http://www.fmea-fmeca.com/fmea-rpn.html)
+[RPN = (Severity * Occurence * Detection)](http://www.fmea-fmeca.com/fmea-rpn.html)
 
 Four values are used to calculate RPN (for our use here):
 * **Severity**
