@@ -43,10 +43,14 @@ function updateRPNOnForm(storedFields:StoredFieldReferences) {
                 (matchingUsersAffectedFields.length > 0) &&
                 (matchingRPNFields.length > 0)) {
                 service.getFieldValues([storedFields.svField, storedFields.ocField, storedFields.dtField, storedFields.usersField]).then((values) => {
-                    var severityValue  = +values[storedFields.svField];
-                    var Occurence = +values[storedFields.ocField];
-                    var Detection = +values[storedFields.dtField];
-                    var UsersAffected = +values[storedFields.usersField];
+                    
+                    var severityValue  = +values[storedFields.svField].toString().split('-')[0].trim();
+                    console.log("severityValue before is  %s", severityValue);
+                    //var severityNum = +severityValue.toString().split('-')[0].trim();
+                    //console.log("severityNum after is  %s", severityNum);
+                    var Occurence = +values[storedFields.ocField].toString().split('-')[0].trim();
+                    var Detection = +values[storedFields.dtField].toString().split('-')[0].trim();
+                    var UsersAffected = +values[storedFields.usersField].toString().split('-')[0].trim();
 
                     var rpn = 0;
                     if (UsersAffected > 0) {
@@ -74,10 +78,11 @@ function updateRPNOnGrid(workItemId, storedFields:StoredFieldReferences):IPromis
     var client = TFS_Wit_Client.getClient();
     client.getWorkItem(workItemId, rpnFields).then((workItem: TFS_Wit_Contracts.WorkItem) => {
         if (storedFields.rpnField !== undefined && storedFields.dtField !== undefined) {     
-            var severityValue = +workItem.fields[storedFields.svField];
-            var Occurence = +workItem.fields[storedFields.ocField];
-            var Detection = +workItem.fields [storedFields.dtField];
-            var UsersAffected = +workItem.fields[storedFields.usersField];
+            var severityValue = +workItem.fields[storedFields.svField].toString().split('-')[0].trim();
+            var Occurence = +workItem.fields[storedFields.ocField].toString().split('-')[0].trim();
+            var Detection = +workItem.fields [storedFields.dtField].toString().split('-')[0].trim();
+            var UsersAffected = +workItem.fields[storedFields.usersField].toString().split('-')[0].trim();
+            // severityValue = severityValue.split('-')[0].trim();
 
             var rpn = 0;
             if (UsersAffected > 0) {

@@ -18,7 +18,7 @@ export class Settings {
         var deferred = Q.defer();
         var client = WIT_Client.getClient();
         client.getFields().then((fields: Contracts.WorkItemField[]) => {
-            this._fields = fields.filter(field => (field.type === Contracts.FieldType.Double || field.type === Contracts.FieldType.Integer))
+            this._fields = fields.filter(field => (field.type === Contracts.FieldType.Double || field.type === Contracts.FieldType.Integer || field.type === Contracts.FieldType.String))
             var sortedFields = this._fields.map(field => field.name).sort((field1,field2) => {
                 if (field1 > field2) {
                     return 1;
