@@ -1,5 +1,5 @@
 {
-    "public": false,
+    "public": true,
     "manifestVersion": 1,
     "id": "RPN-extension",
     "publisher": "symplr",
