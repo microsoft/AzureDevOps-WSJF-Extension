@@ -68,6 +68,7 @@ export class Settings {
                         break;
                     case "rroevalue":
                         that._selectedFields.rvField = fieldReferenceName;
+                        break;
                     case "effort":
                         that._selectedFields.effortField = fieldReferenceName;
                         break;
