@@ -13,6 +13,22 @@ Four values are used to calculate WSJF:
 * **Time Criticality** 
 * **Job Size**
 
+## Requirements
+
+The extension has been tested and verified on Node v12.0.0 and above.
+
+## Building the extention
+
+From the project root, run the following terminal commands:
+
+```bash
+npm install         # Install node dependencies
+npm run build       # Compile the source code
+npm run package     # Package the extension .vsix
+```
+
+This will produce the .vsix package file that you can upload to the Azure Marketplace or install on your on-prem extension gallery.
+
 # Setup
 1. The first thing you need is to create the fields that will store the RR-OE and WSJF values.  [Create a custom decimal field](https://www.visualstudio.com/en-us/docs/work/process/customize-process-field#add-a-custom-field) through the process hub and add it to the work items you want to display WSJF data on.
 ![WSJF displaying on the work item form](marketplace/CreateField.png)
