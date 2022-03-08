@@ -35,6 +35,7 @@ function updateWSJFOnForm(storedFields:StoredFieldReferences) {
             var matchingRROEValueFields = fields.filter(field => field.referenceName === storedFields.rvField);
             var matchingEffortFields = fields.filter(field => field.referenceName === storedFields.effortField); 
             var matchingWSJFFields = fields.filter(field => field.referenceName === storedFields.wsjfField);
+            var roundTo: number = storedFields.roundTo;
 
             //If this work item type has WSJF, then update WSJF
             if ((matchingBusinessValueFields.length > 0) &&
@@ -51,6 +52,9 @@ function updateWSJFOnForm(storedFields:StoredFieldReferences) {
                     var wsjf = 0;
                     if (effort > 0) {
                         wsjf = (businessValue + timeCriticality + rroevalue)/effort;
+                        if(roundTo > -1) {
+                            wsjf = Math.round(wsjf * Math.pow(10, roundTo)) / Math.pow(10, roundTo)
+                        }
                     }
                     
                     service.setFieldValue(storedFields.wsjfField, wsjf);
@@ -78,10 +82,14 @@ function updateWSJFOnGrid(workItemId, storedFields:StoredFieldReferences):IPromi
             var timeCriticality = +workItem.fields[storedFields.tcField];
             var rroevalue = +workItem.fields [storedFields.rvField];
             var effort = +workItem.fields[storedFields.effortField];
+            var roundTo: number = storedFields.roundTo;
 
             var wsjf = 0;
             if (effort > 0) {
                 wsjf = (businessValue + timeCriticality + rroevalue)/effort;
+                if(roundTo > -1) {
+                    wsjf = Math.round(wsjf * Math.pow(10, roundTo)) / Math.pow(10, roundTo)
+                }
             }
 
             var document = [{

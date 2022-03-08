@@ -81,6 +81,28 @@ export class Settings {
         };
     }
 
+    private getNumeralComboOptions(id, source: number[], initialValue: number):IComboOptions {
+        var that = this;
+        return {
+            id: id,
+            mode: "drop",
+            source: source,
+            enabled: true,
+            value: initialValue.toString(),
+            change: function () {
+                that._changeMade = true;
+                let num: number = +(this.getText());
+
+                switch (this._id) {
+                    case "roundTo":
+                        that._selectedFields.roundTo = num;
+                        break;
+                }
+                that.updateSaveButton();
+            }
+        };
+    }
+
     public initialize() {
         let hubContent = $(".hub-content");
         let uri = VSS.getWebContext().collection.uri + "_admin/_process";
@@ -129,7 +151,10 @@ export class Settings {
         $("<label />").text("Effort Field").appendTo(effortContainer);
 
         let wsjfContainer = $("<div />").addClass("settings-control").appendTo(container);
-        $("<label />").text("WSJF Field").appendTo(wsjfContainer);            
+        $("<label />").text("WSJF Field").appendTo(wsjfContainer);
+
+        let roundToContainer = $("<div />").addClass("settings-control").appendTo(container);
+        $("<label />").text("Round to X decimals (-1 = don't round)").appendTo(roundToContainer);
 
         VSS.getService<IExtensionDataService>(VSS.ServiceIds.ExtensionData).then((dataService: IExtensionDataService) => {
             dataService.getValue<StoredFieldReferences>("storedFields").then((storedFields:StoredFieldReferences) => {
@@ -145,7 +170,8 @@ export class Settings {
                         tcField: "Microsoft.VSTS.Common.TimeCriticality",
                         rvField: null,
                         effortField: "Microsoft.VSTS.Scheduling.Effort",
-                        wsjfField: null
+                        wsjfField: null,
+                        roundTo: 0
                     };
                 }
 
@@ -155,6 +181,7 @@ export class Settings {
                     Controls.create(Combo, rvContainer, this.getComboOptions("rroevalue", fieldList, this._selectedFields.rvField));
                     Controls.create(Combo, effortContainer, this.getComboOptions("effort", fieldList, this._selectedFields.effortField));
                     Controls.create(Combo, wsjfContainer, this.getComboOptions("wsjf", fieldList, this._selectedFields.wsjfField));
+                    Controls.create(Combo, roundToContainer, this.getNumeralComboOptions("roundTo", [-1,0,1,2,3], this._selectedFields.roundTo));
                     this.updateSaveButton();
 
                     VSS.notifyLoadSucceeded();
