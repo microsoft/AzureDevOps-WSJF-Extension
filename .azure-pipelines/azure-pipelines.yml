@@ -15,7 +15,7 @@ name: $(version.MajorMinor)$(rev:.r)
 trigger:
   branches:
     include:
-    - main
+    - master
 
 pr: none
 
