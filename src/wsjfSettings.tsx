@@ -83,7 +83,7 @@ export class Settings {
 
     private getNumeralComboOptions(id, source: number[], initialValue: number):IComboOptions {
         var that = this;
-        const currentInitialValue = initialValue ? initialValue?.toString(): null
+        const currentInitialValue = initialValue ? initialValue.toString(): null
         return {
             id: id,
             mode: "drop",
