@@ -66,6 +66,10 @@
             "addressable": true
         },
         {
+            "path": "images",
+            "addressable": true
+        },
+        {
             "path": "dist",
             "addressable": true,
             "packagePath": "scripts"
