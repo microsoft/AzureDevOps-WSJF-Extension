@@ -62,6 +62,10 @@
             "addressable": true
         },
         {
+            "path": "marketplace",
+            "addressable": true
+        },
+        {
             "path": "images",
             "addressable": true
         },
