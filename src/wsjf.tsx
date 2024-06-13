@@ -37,17 +37,36 @@ function updateWSJFOnForm(storedFields:StoredFieldReferences) {
             var matchingWSJFFields = fields.filter(field => field.referenceName === storedFields.wsjfField);
             var roundTo: number = storedFields.roundTo;
 
+
+
+console.log("M == Business Value: ", matchingBusinessValueFields);
+console.log("M ==Time Criticality: "  ,matchingTimeCriticalityFields);
+console.log("M == RROE Value: " , matchingRROEValueFields);
+console.log("M == Effort: ",  matchingEffortFields);
+console.log("M == WSJF: " ,matchingWSJFFields);
+
             //If this work item type has WSJF, then update WSJF
-            if ((matchingBusinessValueFields.length > 0) &&
-                (matchingTimeCriticalityFields.length > 0) &&
-                (matchingRROEValueFields.length > 0) &&
-                (matchingEffortFields.length > 0) &&
-                (matchingWSJFFields.length > 0)) {
+        
                 service.getFieldValues([storedFields.bvField, storedFields.tcField, storedFields.rvField, storedFields.effortField]).then((values) => {
-                    var businessValue  = +values[storedFields.bvField];
-                    var timeCriticality = +values[storedFields.tcField];
-                    var rroevalue = +values[storedFields.rvField];
-                    var effort = +values[storedFields.effortField];
+
+                    console.log("Business Value: " +values[storedFields.bvField]);
+                    console.log("Time Criticality: "+values[storedFields.tcField]);
+                    console.log("RROE Value: "  +values[storedFields.tcField]);
+                    console.log("Effort: " +values[storedFields.effortField]);
+
+
+
+                    var businessValue  = values[storedFields.bvField] !== undefined || NaN? Number(values[storedFields.bvField]) : 0;
+                    var timeCriticality = values[storedFields.tcField] !== undefined || NaN ? Number(values[storedFields.tcField]) : 0;
+                    var rroevalue = values[storedFields.rvField] !== undefined || NaN ? Number(values[storedFields.rvField]) : 0;
+                    var effort = values[storedFields.effortField] !== undefined || NaN ? Number(values[storedFields.effortField]) : 0;
+
+                    // var businessValue  = +values[storedFields.bvField]
+                    // var timeCriticality = +values[storedFields.tcField] 
+                    // var rroevalue = +values[storedFields.rvField] 
+                    // var effort = +values[storedFields.effortField] 
+                 
+               
 
                     var wsjf = 0;
                     if (effort > 0) {
@@ -59,7 +78,7 @@ function updateWSJFOnForm(storedFields:StoredFieldReferences) {
                     
                     service.setFieldValue(storedFields.wsjfField, wsjf);
                 });
-            }
+            
         });
     });
 }
@@ -78,25 +97,38 @@ function updateWSJFOnGrid(workItemId, storedFields:StoredFieldReferences):IPromi
     var client = TFS_Wit_Client.getClient();
     client.getWorkItem(workItemId, wsjfFields).then((workItem: TFS_Wit_Contracts.WorkItem) => {
         if (storedFields.wsjfField !== undefined && storedFields.rvField !== undefined) {     
-            var businessValue = +workItem.fields[storedFields.bvField] || 0
-            var timeCriticality = +workItem.fields[storedFields.tcField] || 0
-            var rroevalue = +workItem.fields [storedFields.rvField] || 0
-            var effort = +workItem.fields[storedFields.effortField] || 0
+            
+            var businessValue = Number(workItem.fields[storedFields.bvField]) || 0
+            
+            var timeCriticality = Number(workItem.fields[storedFields.tcField]) || 0
+            
+            var rroevalue = Number(workItem.fields [storedFields.rvField]) || 0
+            
+            var effort = Number(workItem.fields[storedFields.effortField]) || 0
             var roundTo: number = storedFields.roundTo;
 
 
-            console.log("Business Value: " + businessValue);
-            console.log("Time Criticality: " + timeCriticality);
-            console.log("RROE Value: " + rroevalue);
-            console.log("Effort: " + effort);
-            console.log("Round To: " + roundTo)
+                  
+            // var businessValue = +workItem.fields[storedFields.bvField] 
+            
+            // var timeCriticality = +workItem.fields[storedFields.tcField] 
+            
+            // var rroevalue = +workItem.fields [storedFields.rvField]
+            // var effort = +workItem.fields[storedFields.effortField] 
+            // var roundTo: number = storedFields.roundTo;
+
+
+            // console.log("Business Value: " + businessValue);
+            // console.log("Time Criticality: " + timeCriticality);
+            // console.log("RROE Value: " + rroevalue);
+            // console.log("Effort: " + effort);
+     
 
             var wsjf = 0;
             if (effort > 0) {
                 wsjf = (businessValue + timeCriticality + rroevalue)/effort;
                 if(roundTo > -1) {
-
-                    wsjf = Math.round(wsjf * Math.pow(10, roundTo)) / Math.pow(10, roundTo)
+            wsjf = Math.round(wsjf * Math.pow(10, roundTo)) / Math.pow(10, roundTo)
                 }
             }
 
