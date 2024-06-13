@@ -78,10 +78,10 @@ function updateWSJFOnGrid(workItemId, storedFields:StoredFieldReferences):IPromi
     var client = TFS_Wit_Client.getClient();
     client.getWorkItem(workItemId, wsjfFields).then((workItem: TFS_Wit_Contracts.WorkItem) => {
         if (storedFields.wsjfField !== undefined && storedFields.rvField !== undefined) {     
-            var businessValue = +workItem.fields[storedFields.bvField];
-            var timeCriticality = +workItem.fields[storedFields.tcField];
-            var rroevalue = +workItem.fields [storedFields.rvField];
-            var effort = +workItem.fields[storedFields.effortField];
+            var businessValue = +workItem.fields[storedFields.bvField] || 0
+            var timeCriticality = +workItem.fields[storedFields.tcField] || 0
+            var rroevalue = +workItem.fields [storedFields.rvField] || 0
+            var effort = +workItem.fields[storedFields.effortField] || 0
             var roundTo: number = storedFields.roundTo;
 
 
