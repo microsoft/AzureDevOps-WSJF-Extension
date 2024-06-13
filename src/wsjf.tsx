@@ -84,14 +84,23 @@ function updateWSJFOnGrid(workItemId, storedFields:StoredFieldReferences):IPromi
             var effort = +workItem.fields[storedFields.effortField];
             var roundTo: number = storedFields.roundTo;
 
+
+            console.log("Business Value: " + businessValue);
+            console.log("Time Criticality: " + timeCriticality);
+            console.log("RROE Value: " + rroevalue);
+            console.log("Effort: " + effort);
+            console.log("Round To: " + roundTo)
+
             var wsjf = 0;
             if (effort > 0) {
                 wsjf = (businessValue + timeCriticality + rroevalue)/effort;
                 if(roundTo > -1) {
+
                     wsjf = Math.round(wsjf * Math.pow(10, roundTo)) / Math.pow(10, roundTo)
                 }
             }
 
+            console.log("WSJF: " + wsjf);
             var document = [{
                 from: null,
                 op: "add",
