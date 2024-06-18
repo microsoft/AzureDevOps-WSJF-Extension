@@ -2,7 +2,7 @@
     "public": false,
     "manifestVersion": 1,
     "id": "WSJF-extension",
-    "publisher": "AminTiti1",
+    "publisher": "MS-Agile-SAFe",
     "version": "1.2.0",
     "name": "WSJF (Weighted Shortest Job First)",
     "description": "Auto calculates WSJF (weighted shortest job first) per work item and stores it in a work item field.",
