@@ -1,4 +1,9 @@
-WSJF enables a **calculated field** for computing and storing WSJF on your work items.
+# WSJF (Weighted Shortest Job First)
+
+Weighted Shortest Job First (WSJF) is a prioritization technique used in the Scaled Agile Framework (SAFe) to sequence work items based on their economic impact and size. It calculates the Cost of Delay (considering user value, time criticality, and risk reduction/opportunity enablement) divided by the job size to determine priority. WSJF helps teams maximize ROI by ensuring the most valuable tasks are tackled first, fostering efficient resource allocation and decision-making in agile environments.
+
+
+# Documentation
 
 ![WSJF displaying on the work item form](marketplace/WSJF_on_form.png)
 
@@ -34,5 +39,12 @@ Three values are used to calculate  WSJF:
 * Specify which fields are used for WSJF, Business Value, Time Criticality, and Effort .
 ![Mapping fields for calculation](marketplace/Settings.gif)
 
-## Support
-Because this extension requires the new work item form, it is only supported on VSTS and the next version of TFS (Dev15-RC1).
+# Support
+
+## How to file issues and get help
+
+This project uses [GitHub Issues](https://marketplace.visualstudio.com/items?itemName=MS-Agile-SAFe.WSJF-extension) to track bugs and feature requests. Please search the existing issues before filing new issues to avoid duplicates. For new issues, file your bug or feature request as a new Issue. 
+
+
+## Microsoft DevLabs
+Microsoft DevLabs is an outlet for experiments from Microsoft, experiments that represent some of the latest ideas around developer tools. Solutions in this category are designed for broad usage, and you are encouraged to use and provide feedback on them; however, these extensions are not supported nor are any commitments made as to their longevity.
