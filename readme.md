@@ -11,6 +11,19 @@ Weighted Shortest Job First (WSJF) is a prioritization technique used in the Sca
 For detailed instructions on using the WSJF (Weighted Shortest Job First) for Azure DevOps , please refer to the official documentation. You can access the comprehensive guide by clicking [Market place](https://marketplace.visualstudio.com/items?itemName=MS-Agile-SAFe.WSJF-extension). This resource provides step-by-step information to help you effectively utilize the WSJF features within your Azure DevOps environment.
 
 
+## Building the extention
+
+From the project root, run the following terminal commands:
+
+```bash
+npm install         # Install node dependencies
+npm run build       # Compile the source code
+npm run package     # Package the extension .vsix
+```
+
+This will produce the .vsix package file that you can upload to the Azure Marketplace or install on your on-prem extension gallery.
+
+
 # Support
 
 ## How to file issues and get help
