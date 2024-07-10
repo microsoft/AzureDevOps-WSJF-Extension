@@ -5,11 +5,12 @@ Weighted Shortest Job First (WSJF) is a prioritization technique used in the Sca
 
 # Documentation
 
-![WSJF displaying on the work item form](marketplace/WSJF_on_form.png)
+<img src="marketplace/WSJF_on_form.png" alt="WSJF displaying on the work item form" width="800"/>
 
 The [Scaled Agile Framework](http://www.scaledagileframework.com) defines [WSJF (Weighted Shortest Job First)](http://www.scaledagileframework.com/wsjf/) as a calculation of cost of delay vs. job size which can help teams prioritize their portfolio backlogs with the items contributing the highest ROI.
 
 ![WSJF = (Business Value + Time Criticality)/Job Size](http://www.scaledagileframework.com/wp-content/uploads/2014/07/Figure-2.-A-formula-for-calculating-WSJF.png)
+
 
 Three values are used to calculate  WSJF:
 * **Business Value**
@@ -24,6 +25,7 @@ Three values are used to calculate  WSJF:
 
 2. Navigate to the "WSJF" hub on the collection settings admin experience.  From here, you must specify the fields that will be used for Business Value, Time Criticality, Job Size and WSJF.  The first three are defaulted to the fields provided out of the box by Microsoft but can be changed to custom fields if you prefer.
 ![WSJF displaying on the work item form](marketplace/Settings.png)
+<img src="marketplace/wsjf1.png" alt="WSJF displaying on the work item form" width="800"/>
 
 # Features
 ## Auto calculated WSJF field on the form
@@ -33,11 +35,12 @@ Three values are used to calculate  WSJF:
 
 ## Recalculate WSJF context menu item
 * Update WSJF for all selected work items on the backlog or query grid.
-![Recalculate WSJF on the backlog](marketplace/Recalculate.gif)
+<img src="marketplace/wsjf1.png" alt="Recalculate WSJF on the backlog" width="800"/>
 
 ## Settings hub
 * Specify which fields are used for WSJF, Business Value, Time Criticality, and Effort .
-![Mapping fields for calculation](marketplace/Settings.gif)
+<img src="marketplace/wsjf2.png" alt="Mapping fields for calculation" width="800"/>
+
 
 # Support
 
@@ -45,6 +48,5 @@ Three values are used to calculate  WSJF:
 
 This project uses [GitHub Issues](https://marketplace.visualstudio.com/items?itemName=MS-Agile-SAFe.WSJF-extension) to track bugs and feature requests. Please search the existing issues before filing new issues to avoid duplicates. For new issues, file your bug or feature request as a new Issue. 
 
-
-## Microsoft DevLabs
-Microsoft DevLabs is an outlet for experiments from Microsoft, experiments that represent some of the latest ideas around developer tools. Solutions in this category are designed for broad usage, and you are encouraged to use and provide feedback on them; however, these extensions are not supported nor are any commitments made as to their longevity.
+## Microsoft Support Policy
+Support for this project is limited to the resources listed above.
