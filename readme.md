@@ -20,12 +20,9 @@ This project uses [GitHub Issues](https://marketplace.visualstudio.com/items?ite
 
 ## Contributing
 
-We welcome contributions to improve the Planning Poker for Azure DevOps extension. If you would like to contribute, please fork the repository and create a pull request with your changes. Alternatively, you can contact us to request the necessary permissions for direct access to the repository. Your contributions help enhance the functionality and usability of the extension for the entire community.
+We welcome contributions to improve the WSJF (Weighted Shortest Job First) for Azure DevOps extension. If you would like to contribute, please fork the repository and create a pull request with your changes. Alternatively, you can contact us to request the necessary permissions for direct access to the repository. Your contributions help enhance the functionality and usability of the extension for the entire community.
 
-### Developing 
-
-1. Run `npm install` 
-2. Start `npm run dev` 
+ 
 
 
 ## Microsoft DevLabs
