@@ -1,5 +1,3 @@
-
-
 # WSJF (Weighted Shortest Job First)
 
 Weighted Shortest Job First (WSJF) is a prioritization technique used in the Scaled Agile Framework (SAFe) to sequence work items based on their economic impact and size. It calculates the Cost of Delay (considering user value, time criticality, and risk reduction/opportunity enablement) divided by the job size to determine priority. WSJF helps teams maximize ROI by ensuring the most valuable tasks are tackled first, fostering efficient resource allocation and decision-making in agile environments.
