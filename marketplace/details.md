@@ -1,26 +1,31 @@
 # WSJF (Weighted Shortest Job First)
 
- The [Scaled Agile Framework](http://www.scaledagileframework.com) defines [WSJF (Weighted Shortest Job First)](http://www.scaledagileframework.com/wsjf/) as a calculation of cost of delay vs. job size which can help teams prioritize their portfolio backlogs with the items contributing the highest ROI.
+Weighted Shortest Job First (WSJF) is a prioritization technique used in the Scaled Agile Framework (SAFe) to sequence work items based on their economic impact and size. It calculates the Cost of Delay (considering user value, time criticality, and risk reduction/opportunity enablement) divided by the job size to determine priority. WSJF helps teams maximize ROI by ensuring the most valuable tasks are tackled first, fostering efficient resource allocation and decision-making in agile environments.
 
 # Documentation
 
-###  THe valuesused to calculate WSJF
-- Business Value**
-- Time Criticality** 
+ The [Scaled Agile Framework](http://www.scaledagileframework.com) defines [WSJF (Weighted Shortest Job First)](http://www.scaledagileframework.com/wsjf/) as a calculation of cost of delay vs. job size which can help teams prioritize their portfolio backlogs with the items contributing the highest ROI.
+
+ ![WSJF = Business Value + Time Criticality + Risk Reduction | Opportunity Enablement /Effort](marketplace/WSJF-used-values.png)
+
+###  The values used to calculate WSJF
+
+- Business Value
+- Time Criticality
 - Risk Reduction | Opportunity Enablement
-- Job Size
+- Effort
 
 1. Create Fields
 
 - The first thing you need is to create the fields that will store the RR-OE and WSJF values. Create a custom decimal field through the process hub and add it to the work items you want to display WSJF data on.
 
-![WSJF displaying on the work item form](marketplace/WSJF-Field.png)
+![Create a custom decimal field](marketplace/WSJF-create-fields.png)
 
 2. Configure WSJF 
 
 - Navigate to the "WSJF" hub in the organisation settings. From here, you must specify the fields that will be used for Business Value, Time Criticality, Job Size and WSJF.  The first three are defaulted to the fields provided out of the box by Microsoft but can be changed to custom fields if you prefer.
 
-[WSJF Create fields](marketplace/WSJF-Setting.png)
+![WSJF displaying on the work item form](marketplace/WSJF-Setting.png)
 
 3. Auto calculated WSJF field on the form
 
@@ -34,14 +39,14 @@
 
 ![Recalculate WSJF on the backlog](marketplace/RecalculateWSJF.gif)
 
-*NOTE: If you're using TFS onprem, you need to use witadmin to [Create a custom decimal field](https://www.visualstudio.com/en-us/docs/work/customize/add-modify-field#to-add-a-custom-field)*
+*NOTE: If you're using Azure DevOps Server, you need to use witadmin to [Create a custom decimal field](https://www.visualstudio.com/en-us/docs/work/customize/add-modify-field#to-add-a-custom-field)*
 
-## Adding RROE and WSJF Score Values (For TFS)
+## Adding RROE and WSJF Score Values (For Azure DevOps Server)
 
-Export your WorkItem.XML file (ie. Epic.XML) using [WITAdmin](https://docs.microsoft.com/en-us/Azure DevOps/work/customize/reference/witadmin/witadmin-import-export-manage-wits?view=tfs-2018)
+Export your WorkItem.XML file (ie. Epic.XML) using [WITAdmin](https://learn.microsoft.com/en-us/previous-versions/azure/devops/reference/witadmin/witadmin-import-export-manage-wits?view=tfs-2018)
 At the bottom of your "Fields" section add the following (Name and reference names may vary):
 
-```bash
+```xml
   <FIELD name="WSJF Risk-Reduction Opportunity-Enablement" refname="WSJF.RROEValue" type="Integer" reportable="dimension">
    <HELPTEXT>WSJF Risk-Reduction</HELPTEXT>
  </FIELD>
@@ -52,7 +57,7 @@ At the bottom of your "Fields" section add the following (Name and reference nam
  ```
  3. Under your <Form> and <WebLayout> tags, choose where you would like the WSJF calculation to go and add:
 
- ```bash
+ ```xml
  <Section>
 		   <Group Label="WSJF">
               <Control Label="User-Business Value" Type="FieldControl" FieldName="Microsoft.Azure DevOps.Common.BusinessValue" EmptyText="[Numbered Value]" />
@@ -70,7 +75,7 @@ At the bottom of your "Fields" section add the following (Name and reference nam
 
 ## How to file issues and get help
 
-This project uses [GitHub Issues](https://marketplace.visualstudio.com/items?itemName=MS-Agile-SAFe.WSJF-extension) to track bugs and feature requests. Please search the existing issues before filing new issues to avoid duplicates. For new issues, file your bug or feature request as a new Issue. 
+This project uses [GitHub Issues](https://github.com/microsoft/AzureDevOps-WSJF-Extension/issue) to track bugs and feature requests. Please search the existing issues before filing new issues to avoid duplicates. For new issues, file your bug or feature request as a new Issue. 
 
 ## Microsoft Support Policy
 

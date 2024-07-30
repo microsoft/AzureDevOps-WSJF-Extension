@@ -4,13 +4,13 @@ Weighted Shortest Job First (WSJF) is a prioritization technique used in the Sca
 
 # Documentation 
 
-For detailed instructions on using the WSJF (Weighted Shortest Job First) for Azure DevOps , please refer to the official documentation. You can access the comprehensive guide by clicking [Market place](https://marketplace.visualstudio.com/items?itemName=MS-Agile-SAFe.WSJF-extension). This resource provides step-by-step information to help you effectively utilize the WSJF features within your Azure DevOps environment.
+For detailed instructions on using the WSJF (Weighted Shortest Job First) for Azure DevOps , please refer to the official documentation. You can access the comprehensive guide by clicking [Marketplace](https://marketplace.visualstudio.com/items?itemName=MS-Agile-SAFe.WSJF-extension). This resource provides step-by-step information to help you effectively utilize the WSJF features within your Azure DevOps environment.
 
 # Support
 
 ## How to file issues and get help
 
-This project uses [GitHub Issues](https://marketplace.visualstudio.com/items?itemName=MS-Agile-SAFe.WSJF-extension) to track bugs and feature requests. Please search the existing issues before filing new issues to avoid duplicates. For new issues, file your bug or feature request as a new Issue. 
+This project uses [GitHub Issues](https://github.com/microsoft/AzureDevOps-WSJF-Extension/issues) to track bugs and feature requests. Please search the existing issues before filing new issues to avoid duplicates. For new issues, file your bug or feature request as a new Issue. 
 
 ## Microsoft Support Policy
 
@@ -23,6 +23,7 @@ contributions help enhance the functionality and usability of the extension for 
 
 **Note:** do not publish the extension as a public extension under a different publisher as this will create a clone of the extension and it will be unclear to the 
 community which one to use. If you feel you don't want to contribute to this repository then publish a private version for your use-case.
+
 Check out https://learn.microsoft.com/en-us/azure/devops/extend/get-started to learn how to develop Azure DevOps extensions
 
 ### Building the extention
@@ -34,8 +35,6 @@ npm install
 # Build the extension
 npm run build
 ```
-This will produce the .vsix package file that you can upload to the Azure Marketplace or install on your on-prem extension gallery.
-
 ## About Microsoft DevLabs
 
 Microsoft DevLabs is an outlet for experiments from Microsoft, experiments that represent some of the latest ideas around developer tools. Solutions in this 
