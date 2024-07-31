@@ -56,6 +56,7 @@ At the bottom of your "Fields" section add the following (Name and reference nam
  </FIELD> 
  ```
  3. Under your <Form> and <WebLayout> tags, choose where you would like the WSJF calculation to go and add:
+  <Form> and <WebLayout> tags, choose where you would like the WSJF calculation to go and add:
 
  ```xml
  <Section>
