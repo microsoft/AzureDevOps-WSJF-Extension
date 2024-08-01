@@ -13,7 +13,7 @@ Weighted Shortest Job First (WSJF) is a prioritization technique used in the Sca
 - Business Value
 - Time Criticality
 - Risk Reduction | Opportunity Enablement
-- Effort
+- Job Size (Effort)
 
 1. Create Fields
 
@@ -55,8 +55,8 @@ At the bottom of your "Fields" section add the following (Name and reference nam
    <HELPTEXT>WSJF Score</HELPTEXT>
  </FIELD> 
  ```
- 3. Under your <Form> and <WebLayout> tags, choose where you would like the WSJF calculation to go and add:
-  <Form> and <WebLayout> tags, choose where you would like the WSJF calculation to go and add:
+ 3. Under your `<Form>` and `<WebLayout>` tags, choose where you would like the WSJF calculation to go and add:
+
 
  ```xml
  <Section>
