@@ -57,16 +57,15 @@ At the bottom of your "Fields" section add the following (Name and reference nam
  ```
  3. Under your `<Form>` and `<WebLayout>` tags, choose where you would like the WSJF calculation to go and add:
 
-
- ```xml
+```xml
  <Section>
-		   <Group Label="WSJF">
-              <Control Label="User-Business Value" Type="FieldControl" FieldName="Microsoft.Azure DevOps.Common.BusinessValue" EmptyText="[Numbered Value]" />
-              <Control Label="Urgency/Time Criticality" Type="FieldControl" FieldName="Microsoft.Azure DevOps.Common.TimeCriticality" EmptyText="[Numbered Value]" />
-              <Control Label="Risk Reduction/Opportunity Enablement" Type="FieldControl" FieldName="WSJF.RROEValue" EmptyText="[Numbered Value]" />
-			           <Control Label="Size" Type="FieldControl" FieldName="Microsoft.Azure DevOps.Scheduling.Effort" EmptyText="[Numbered Value]" />
-              <Control Label="WSJF Score" Type="FieldControl" FieldName="WSJF.Score" EmptyText="[Numbered Value]" />
-     </Group>
+  <Group Label="WSJF">
+    <Control Label="User-Business Value" Type="FieldControl" FieldName="Microsoft.Azure DevOps.Common.BusinessValue" EmptyText="[Numbered Value]" />
+    <Control Label="Urgency/Time Criticality" Type="FieldControl" FieldName="Microsoft.Azure DevOps.Common.TimeCriticality" EmptyText="[Numbered Value]" />
+     <Control Label="Risk Reduction/Opportunity Enablement" Type="FieldControl" FieldName="WSJF.RROEValue" EmptyText="[Numbered Value]" />
+		 <Control Label="Size" Type="FieldControl" FieldName="Microsoft.Azure DevOps.Scheduling.Effort" EmptyText="[Numbered Value]" />
+    <Control Label="WSJF Score" Type="FieldControl" FieldName="WSJF.Score" EmptyText="[Numbered Value]" />
+ </Group>
 </Section>
 ```
 - After this is done, open up your WSJF tab and adjust your settings
