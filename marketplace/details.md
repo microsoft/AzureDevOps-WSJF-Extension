@@ -15,7 +15,7 @@ The [Scaled Agile Framework](http://www.scaledagileframework.com) defines [WSJF 
 - Risk Reduction | Opportunity Enablement
 - Job Size (Effort)
 
-### The steps below shows how to configure and use the WSJF extensio
+### The steps below shows how to configure and use the WSJF extension
 
 1. Create Fields
 
@@ -29,8 +29,8 @@ The [Scaled Agile Framework](http://www.scaledagileframework.com) defines [WSJF 
 
 3. Auto calculated WSJF field on the form
 
-- WSJF is automatically updated when form is loaded.
-- WSJF is automatically updated when the Business Value, Time Criticality, Effort,or Risk Reduction fields are updated.
+- WSJF is automatically updated when the form is loaded.
+- WSJF is automatically updated when the Business Value, Time Criticality, Effort, or Risk Reduction fields are updated.
 ![WSJF is automatically updated on the work item form](marketplace/AutoCalcWSJF.gif)
 
 4. Recalculate WSJF context menu item
