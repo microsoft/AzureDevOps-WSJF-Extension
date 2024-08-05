@@ -20,26 +20,22 @@ The [Scaled Agile Framework](http://www.scaledagileframework.com) defines [WSJF 
 1. Create Fields
 
 - The first thing you need is to create the fields that will store the RR-OE and WSJF values. Create a custom decimal field through the process hub and add it to the work items you want to display WSJF data on.
-
 ![Create a custom decimal field](marketplace/WSJF-create-fields.png)
 
 2. Configure WSJF
 
 - Navigate to the "WSJF" hub in the organisation settings. From here, you must specify the fields that will be used for Business Value, Time Criticality, Job Size and WSJF. The first three are defaulted to the fields provided out of the box by Microsoft but can be changed to custom fields if you prefer.
-
 ![WSJF displaying on the work item form](marketplace/WSJF-Setting.png)
 
 3. Auto calculated WSJF field on the form
 
 - WSJF is automatically updated when form is loaded.
 - WSJF is automatically updated when the Business Value, Time Criticality, Effort,or Risk Reduction fields are updated.
-
 ![WSJF is automatically updated on the work item form](marketplace/AutoCalcWSJF.gif)
 
 4. Recalculate WSJF context menu item
 
 - Update WSJF for all selected work items on the backlog or query grid.
-
 ![Recalculate WSJF on the backlog](marketplace/RecalculateWSJF.gif)
 
 _NOTE: If you're using Azure DevOps Server, you need to use witadmin to [Create a custom decimal field](https://www.visualstudio.com/en-us/docs/work/customize/add-modify-field#to-add-a-custom-field)_
