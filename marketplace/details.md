@@ -4,16 +4,18 @@ Weighted Shortest Job First (WSJF) is a prioritization technique used in the Sca
 
 # Documentation
 
- The [Scaled Agile Framework](http://www.scaledagileframework.com) defines [WSJF (Weighted Shortest Job First)](http://www.scaledagileframework.com/wsjf/) as a calculation of cost of delay vs. job size which can help teams prioritize their portfolio backlogs with the items contributing the highest ROI.
+The [Scaled Agile Framework](http://www.scaledagileframework.com) defines [WSJF (Weighted Shortest Job First)](http://www.scaledagileframework.com/wsjf/) as a calculation of cost of delay vs. job size which can help teams prioritize their portfolio backlogs with the items contributing the highest ROI.
 
- ![WSJF = Business Value + Time Criticality + Risk Reduction | Opportunity Enablement /Effort](marketplace/WSJF-used-values.png)
+![WSJF = Business Value + Time Criticality + Risk Reduction | Opportunity Enablement /Effort](marketplace/WSJF-used-values.png)
 
-###  The values used to calculate WSJF
+### The values used to calculate WSJF
 
 - Business Value
 - Time Criticality
 - Risk Reduction | Opportunity Enablement
 - Job Size (Effort)
+
+### The steps below shows how to configure and use the WSJF extensio
 
 1. Create Fields
 
@@ -21,25 +23,26 @@ Weighted Shortest Job First (WSJF) is a prioritization technique used in the Sca
 
 ![Create a custom decimal field](marketplace/WSJF-create-fields.png)
 
-2. Configure WSJF 
+2. Configure WSJF
 
-- Navigate to the "WSJF" hub in the organisation settings. From here, you must specify the fields that will be used for Business Value, Time Criticality, Job Size and WSJF.  The first three are defaulted to the fields provided out of the box by Microsoft but can be changed to custom fields if you prefer.
+- Navigate to the "WSJF" hub in the organisation settings. From here, you must specify the fields that will be used for Business Value, Time Criticality, Job Size and WSJF. The first three are defaulted to the fields provided out of the box by Microsoft but can be changed to custom fields if you prefer.
 
 ![WSJF displaying on the work item form](marketplace/WSJF-Setting.png)
 
 3. Auto calculated WSJF field on the form
 
 - WSJF is automatically updated when form is loaded.
-- WSJF is automatically updated when the Business Value, Time Criticality, Effort,   or Risk Reduction fields are updated.
+- WSJF is automatically updated when the Business Value, Time Criticality, Effort,or Risk Reduction fields are updated.
 
 ![WSJF is automatically updated on the work item form](marketplace/AutoCalcWSJF.gif)
 
 4. Recalculate WSJF context menu item
+
 - Update WSJF for all selected work items on the backlog or query grid.
 
 ![Recalculate WSJF on the backlog](marketplace/RecalculateWSJF.gif)
 
-*NOTE: If you're using Azure DevOps Server, you need to use witadmin to [Create a custom decimal field](https://www.visualstudio.com/en-us/docs/work/customize/add-modify-field#to-add-a-custom-field)*
+_NOTE: If you're using Azure DevOps Server, you need to use witadmin to [Create a custom decimal field](https://www.visualstudio.com/en-us/docs/work/customize/add-modify-field#to-add-a-custom-field)_
 
 ## Adding RROE and WSJF Score Values (For Azure DevOps Server)
 
@@ -50,32 +53,34 @@ At the bottom of your "Fields" section add the following (Name and reference nam
   <FIELD name="WSJF Risk-Reduction Opportunity-Enablement" refname="WSJF.RROEValue" type="Integer" reportable="dimension">
    <HELPTEXT>WSJF Risk-Reduction</HELPTEXT>
  </FIELD>
- 
+
  <FIELD name="WSJF Score" refname="WSJF.Score" type="Double" reportable="dimension">
    <HELPTEXT>WSJF Score</HELPTEXT>
- </FIELD> 
- ```
- 3. Under your `<Form>` and `<WebLayout>` tags, choose where you would like the WSJF calculation to go and add:
+ </FIELD>
+```
+
+3.  Under your `<Form>` and `<WebLayout>` tags, choose where you would like the WSJF calculation to go and add:
 
 ```xml
  <Section>
   <Group Label="WSJF">
     <Control Label="User-Business Value" Type="FieldControl" FieldName="Microsoft.Azure DevOps.Common.BusinessValue" EmptyText="[Numbered Value]" />
     <Control Label="Urgency/Time Criticality" Type="FieldControl" FieldName="Microsoft.Azure DevOps.Common.TimeCriticality" EmptyText="[Numbered Value]" />
-     <Control Label="Risk Reduction/Opportunity Enablement" Type="FieldControl" FieldName="WSJF.RROEValue" EmptyText="[Numbered Value]" />
-		 <Control Label="Size" Type="FieldControl" FieldName="Microsoft.Azure DevOps.Scheduling.Effort" EmptyText="[Numbered Value]" />
+    <Control Label="Risk Reduction/Opportunity Enablement" Type="FieldControl" FieldName="WSJF.RROEValue" EmptyText="[Numbered Value]" />
+		<Control Label="Size" Type="FieldControl" FieldName="Microsoft.Azure DevOps.Scheduling.Effort" EmptyText="[Numbered Value]" />
     <Control Label="WSJF Score" Type="FieldControl" FieldName="WSJF.Score" EmptyText="[Numbered Value]" />
  </Group>
 </Section>
 ```
+
 - After this is done, open up your WSJF tab and adjust your settings
-![WSJF_Settings](marketplace/WSJF_Settings.png)
+  ![WSJF_Settings](marketplace/WSJF_Settings.png)
 
 ## Support
 
 ## How to file issues and get help
 
-This project uses [GitHub Issues](https://github.com/microsoft/AzureDevOps-WSJF-Extension/issue) to track bugs and feature requests. Please search the existing issues before filing new issues to avoid duplicates. For new issues, file your bug or feature request as a new Issue. 
+This project uses [GitHub Issuess](https://github.com/microsoft/AzureDevOps-WSJF-Extension/issue) to track bugs and feature requests. Please search the existing issues before filing new issues to avoid duplicates. For new issues, file your bug or feature request as a new Issue.
 
 ## Microsoft Support Policy
 
