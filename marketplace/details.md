@@ -91,7 +91,7 @@ At the bottom of your "Fields" section add the following (Name and reference nam
 ```
 
 - After this is done, open up your WSJF tab and adjust your settings
-  ![WSJF_Settings](marketplace/WSJF_Setting.png)
+![WSJF displaying on the work item form](marketplace/WSJF-Setting.png)
 
 ## Support
 
