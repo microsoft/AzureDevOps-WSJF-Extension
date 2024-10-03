@@ -36,7 +36,7 @@ The [Scaled Agile Framework](http://www.scaledagileframework.com) defines [WSJF 
 4. Recalculate WSJF context menu item
 
 - Update WSJF for all selected work items on the backlog or query grid.
-![Recalculate WSJF on the backlog](marketplace/RecalculateWSJF.gif)
+![Recalculate WSJF on the backlog](marketplace/RecalculateWSJF.png)
 
 _NOTE: If you're using Azure DevOps Server, you need to use witadmin to [Create a custom decimal field](https://www.visualstudio.com/en-us/docs/work/customize/add-modify-field#to-add-a-custom-field)_
 
@@ -91,7 +91,7 @@ At the bottom of your "Fields" section add the following (Name and reference nam
 ```
 
 - After this is done, open up your WSJF tab and adjust your settings
-  ![WSJF_Settings](marketplace/WSJF_Settings.png)
+  ![WSJF_Settings](marketplace/WSJF_Setting.png)
 
 ## Support
 
