@@ -3,7 +3,7 @@
     "manifestVersion": 1,
     "id": "WSJF-extension",
     "publisher": "MS-Agile-SAFe",
-    "version": "1.2.8",
+    "version": "1.2.18",
     "name": "WSJF (Weighted Shortest Job First)",
     "description": "Auto calculates WSJF (weighted shortest job first) per work item and stores it in a work item field.",
     "categories": [ "Azure Boards" ],
