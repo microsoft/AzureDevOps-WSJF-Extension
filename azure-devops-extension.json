@@ -102,7 +102,7 @@
             "path": "marketplace/details.md"
         },
         "license": {
-            "path": "license.md"
+            "path": "LICENSE"
         }
     },
     "repository": {
