@@ -6,7 +6,9 @@
     "version": "1.2.0",
     "name": "WSJF (Weighted Shortest Job First)",
     "description": "Auto calculates WSJF (weighted shortest job first) per work item and stores it in a work item field.",
-    "categories": [ "Azure Boards" ],
+    "categories": [
+        "Azure Boards"
+    ],
     "tags": [
         "WSJF",
         "SAFe"
@@ -91,24 +93,22 @@
     "scopes": [
         "vso.work",
         "vso.work_write"
-    ],    
+    ],
     "icons": {
         "default": "images/logo.png"
     },
     "content": {
         "details": {
             "path": "marketplace/details.md"
-        }
-    },
-    "links": {
-        "support": {
-            "uri": "mailto:jmarks@microsoft.com"
+        },
+        "license": {
+            "path": "license.md"
         }
     },
     "repository": {
         "type": "git",
         "uri": "https://github.com/Microsoft/vsts-wsjf-extension"
-      },
+    },
     "branding": {
         "color": "rgb(220, 235, 252)",
         "theme": "light"
