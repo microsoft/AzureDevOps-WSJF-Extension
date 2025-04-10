@@ -105,6 +105,11 @@
             "path": "LICENSE"
         }
     },
+    "links": {
+        "support": {
+            "uri": "https://github.com/Microsoft/vsts-wsjf-extension/issues"
+        }
+    },
     "repository": {
         "type": "git",
         "uri": "https://github.com/Microsoft/vsts-wsjf-extension"
