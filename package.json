@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
   "devDependencies": {
-    "tfx-cli": "^0.11.0",
-    "typescript": "^4.5.2"
+    "tfx-cli": "^0.21.1",
+    "typescript": "^5.9.2"
   },
   "scripts": {
     "build": "tsc -p .",
@@ -10,7 +10,6 @@
     "package": "tfx extension create"
   },
   "dependencies": {
-    "q": "^1.5.1",
     "vss-web-extension-sdk": "^5.141.0"
   }
 }

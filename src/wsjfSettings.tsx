@@ -1,4 +1,3 @@
-import Q = require("q");
 import Controls = require("VSS/Controls");
 import {Combo, IComboOptions} from "VSS/Controls/Combos";
 import Menus = require("VSS/Controls/Menus");
@@ -15,25 +14,24 @@ export class Settings {
     private _menuBar = null;
 
     private getSortedFieldsList():IPromise<any> {
-        var deferred = Q.defer();
-        var client = WIT_Client.getClient();
-        client.getFields().then((fields: Contracts.WorkItemField[]) => {
-            this._fields = fields.filter(field => (field.type === Contracts.FieldType.Double || field.type === Contracts.FieldType.Integer))
-            var sortedFields = this._fields.map(field => field.name).sort((field1,field2) => {
-                if (field1 > field2) {
-                    return 1;
-                }
+        return new Promise<any>((resolve, reject) => {
+            var client = WIT_Client.getClient();
+            client.getFields().then((fields: Contracts.WorkItemField[]) => {
+                this._fields = fields.filter(field => (field.type === Contracts.FieldType.Double || field.type === Contracts.FieldType.Integer))
+                var sortedFields = this._fields.map(field => field.name).sort((field1,field2) => {
+                    if (field1 > field2) {
+                        return 1;
+                    }
 
-                if (field1 < field2) {
-                    return -1;
-                }
+                    if (field1 < field2) {
+                        return -1;
+                    }
 
-                return 0;
+                    return 0;
+                });
+                resolve(sortedFields);
             });
-            deferred.resolve(sortedFields);
-        });
-
-        return deferred.promise;
+        }) as any;
     }
 
     private getFieldReferenceName(fieldName): string {
