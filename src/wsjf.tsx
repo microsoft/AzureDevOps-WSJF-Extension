@@ -1,5 +1,3 @@
-import Q = require("q");
-
 import TFS_Wit_Contracts = require("TFS/WorkItemTracking/Contracts");
 import TFS_Wit_Client = require("TFS/WorkItemTracking/RestClient");
 import TFS_Wit_Services = require("TFS/WorkItemTracking/Services");
@@ -7,22 +5,22 @@ import TFS_Wit_Services = require("TFS/WorkItemTracking/Services");
 import { StoredFieldReferences } from "./wsjfModels";
 
 function GetStoredFields(): IPromise<any> {
-  var deferred = Q.defer();
-  VSS.getService<IExtensionDataService>(VSS.ServiceIds.ExtensionData).then(
-    (dataService: IExtensionDataService) => {
-      dataService
-        .getValue<StoredFieldReferences>("storedFields")
-        .then((storedFields: StoredFieldReferences) => {
-          if (storedFields) {
-            console.log("Retrieved fields from storage");
-            deferred.resolve(storedFields);
-          } else {
-            deferred.reject("Failed to retrieve fields from storage");
-          }
-        });
-    }
-  );
-  return deferred.promise;
+  return new Promise<any>((resolve, reject) => {
+    VSS.getService<IExtensionDataService>(VSS.ServiceIds.ExtensionData).then(
+      (dataService: IExtensionDataService) => {
+        dataService
+          .getValue<StoredFieldReferences>("storedFields")
+          .then((storedFields: StoredFieldReferences) => {
+            if (storedFields) {
+              console.log("Retrieved fields from storage");
+              resolve(storedFields);
+            } else {
+              reject("Failed to retrieve fields from storage");
+            }
+          });
+      }
+    );
+  }) as any;
 }
 
 function getWorkItemFormService() {
@@ -104,62 +102,60 @@ function updateWSJFOnGrid(
     storedFields.wsjfField,
   ];
 
-  var deferred = Q.defer();
+  return new Promise<any>((resolve, reject) => {
+    var client = TFS_Wit_Client.getClient();
+    client
+      .getWorkItem(workItemId, wsjfFields)
+      .then((workItem: TFS_Wit_Contracts.WorkItem) => {
+        if (
+          storedFields.wsjfField !== undefined &&
+          storedFields.rvField !== undefined
+        ) {
+          var businessValue = Number(workItem.fields[storedFields.bvField]) || 0;
 
-  var client = TFS_Wit_Client.getClient();
-  client
-    .getWorkItem(workItemId, wsjfFields)
-    .then((workItem: TFS_Wit_Contracts.WorkItem) => {
-      if (
-        storedFields.wsjfField !== undefined &&
-        storedFields.rvField !== undefined
-      ) {
-        var businessValue = Number(workItem.fields[storedFields.bvField]) || 0;
+          var timeCriticality =
+            Number(workItem.fields[storedFields.tcField]) || 0;
 
-        var timeCriticality =
-          Number(workItem.fields[storedFields.tcField]) || 0;
+          var rroevalue = Number(workItem.fields[storedFields.rvField]) || 0;
 
-        var rroevalue = Number(workItem.fields[storedFields.rvField]) || 0;
+          var effort = Number(workItem.fields[storedFields.effortField]) || 0;
+          var roundTo: number = storedFields.roundTo;
 
-        var effort = Number(workItem.fields[storedFields.effortField]) || 0;
-        var roundTo: number = storedFields.roundTo;
-
-        var wsjf = 0;
-        if (effort > 0) {
-          wsjf = (businessValue + timeCriticality + rroevalue) / effort;
-          if (roundTo > -1) {
-            wsjf =
-              Math.round(wsjf * Math.pow(10, roundTo)) / Math.pow(10, roundTo);
+          var wsjf = 0;
+          if (effort > 0) {
+            wsjf = (businessValue + timeCriticality + rroevalue) / effort;
+            if (roundTo > -1) {
+              wsjf =
+                Math.round(wsjf * Math.pow(10, roundTo)) / Math.pow(10, roundTo);
+            }
           }
-        }
 
-        var document = [
-          {
-            from: null,
-            op: "add",
-            path: "/fields/" + storedFields.wsjfField,
-            value: wsjf,
-          },
-        ];
+          var document = [
+            {
+              from: null,
+              op: "add",
+              path: "/fields/" + storedFields.wsjfField,
+              value: wsjf,
+            },
+          ];
 
-        // Only update the work item if the WSJF has changed
-        if (wsjf != workItem.fields[storedFields.wsjfField]) {
-          client
-            .updateWorkItem(document, workItemId)
-            .then((updatedWorkItem: TFS_Wit_Contracts.WorkItem) => {
-              deferred.resolve(updatedWorkItem);
-            });
+          // Only update the work item if the WSJF has changed
+          if (wsjf != workItem.fields[storedFields.wsjfField]) {
+            client
+              .updateWorkItem(document, workItemId)
+              .then((updatedWorkItem: TFS_Wit_Contracts.WorkItem) => {
+                resolve(updatedWorkItem);
+              });
+          } else {
+            reject("No relevant change to work item");
+          }
         } else {
-          deferred.reject("No relevant change to work item");
+          reject(
+            "Unable to calculate WSJF, please configure fields on the collection settings page."
+          );
         }
-      } else {
-        deferred.reject(
-          "Unable to calculate WSJF, please configure fields on the collection settings page."
-        );
-      }
-    });
-
-  return deferred.promise;
+      });
+  }) as any;
 }
 
 var formObserver = (context) => {
@@ -242,7 +238,7 @@ var contextProvider = (context) => {
             });
 
             // Refresh view
-            Q.all(promises).then(() => {
+            Promise.all(promises).then(() => {
               VSS.getService(VSS.ServiceIds.Navigation).then(
                 (navigationService: IHostNavigationService) => {
                   navigationService.reload();
